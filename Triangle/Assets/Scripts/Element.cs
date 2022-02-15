@@ -13,5 +13,7 @@ public enum Element
     FIREWALL,
     ICE,
     LIGHTNING,
-    PLANTTHROW
+    PLANTTHROW,
+
+    NONE
 }

@@ -1,5 +1,5 @@
 
 public interface IHealth
 {
-    public void TakeDamage(int damage);
+    public void TakeDamage(int damage, Element element);
 }

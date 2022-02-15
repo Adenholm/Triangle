@@ -14,7 +14,7 @@ public class ElementHandler : MonoBehaviour
             case Element.ICE: return new HashSet<Element> { Element.WATER, Element.WIND };
             case Element.LIGHTNING: return new HashSet<Element> { Element.FIRE, Element.WIND };
             case Element.PLANTTHROW: return new HashSet<Element> { Element.WIND, Element.PLANT };
-            default: throw new System.Exception("Invalid Element input");
+            default: Debug.Log("Invalid Element input"); return null;
         }
     }
 
@@ -26,6 +26,10 @@ public class ElementHandler : MonoBehaviour
         else if (elements.SetEquals(GetBaseElements(Element.ICE))) return Element.ICE;
         else if (elements.SetEquals(GetBaseElements(Element.LIGHTNING))) return Element.LIGHTNING;
         else if (elements.SetEquals(GetBaseElements(Element.PLANTTHROW))) return Element.PLANTTHROW;
-        else throw new System.Exception("Invalid Element combination");
+        else
+        {
+            Debug.Log("Invalid Element combination");
+            return Element.NONE;
+        }
     }
 }
