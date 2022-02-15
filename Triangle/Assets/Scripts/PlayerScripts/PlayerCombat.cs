@@ -38,7 +38,7 @@ public class PlayerCombat : MonoBehaviour
                 nextAttackTime = Time.time + 1f / attakRate;
                 pm.FreezeMovement(nextAttackTime);
             }
-            if (Input.GetKeyDown(KeyCode.LeftShift) && elementAttack.Equals(null))
+            if (Input.GetKeyDown(KeyCode.LeftShift) && !elementAttack.Equals(null))
             {
                 elementAttack.Attack(attackDamage);
                 nextAttackTime = Time.time + 1f / attakRate;

@@ -5,15 +5,15 @@ using UnityEngine;
 public class Enemy : MonoBehaviour, IHealth
 {
     private Animator animatior;
+    private Health health;
 
-    public int maxHealth = 100;
-    private int currentHealth;
+    public Element element;
 
     // Start is called before the first frame update
     void Start()
     {
-        animatior = GetComponent<Animator>();
-        currentHealth = maxHealth;
+        animatior = GetComponentInChildren<Animator>();
+        health = GetComponent<Health>();
     }
 
     // Update is called once per frame
@@ -24,13 +24,7 @@ public class Enemy : MonoBehaviour, IHealth
 
     public void TakeDamage(int damage, Element element)
     {
-        currentHealth -= damage;
-        
-        
-        if (currentHealth <= 0)
-        {
-            Die();
-        }
+        health.TakeDamage(damage, element);
     }
 
     private void Die()

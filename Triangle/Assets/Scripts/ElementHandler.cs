@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ElementHandler : MonoBehaviour
+public static class ElementHandler
 {
-    ISet<Element> GetBaseElements(Element e)
+    public static ISet<Element> GetBaseElements(Element e)
     {
         switch (e)
         {
@@ -18,7 +18,7 @@ public class ElementHandler : MonoBehaviour
         }
     }
 
-    Element GetElement(ISet<Element> elements)
+    public static Element GetElement(ISet<Element> elements)
     {
         if (elements.SetEquals(GetBaseElements(Element.STEAM))) return Element.STEAM;
         else if (elements.SetEquals(GetBaseElements(Element.POISON))) return Element.POISON;
@@ -31,5 +31,10 @@ public class ElementHandler : MonoBehaviour
             Debug.Log("Invalid Element combination");
             return Element.NONE;
         }
+    }
+
+    public static double DamageConverter(Element ownElem, Element damagingElem)
+    {
+        return 1;
     }
 }
