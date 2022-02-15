@@ -22,7 +22,7 @@ public class Enemy : MonoBehaviour, IHealth
         
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage, Element element)
     {
         currentHealth -= damage;
         
