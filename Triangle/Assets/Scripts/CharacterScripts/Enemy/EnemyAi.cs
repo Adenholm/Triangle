@@ -15,6 +15,7 @@ public class EnemyAi : MonoBehaviour
     public int maxDistanceFromSpawn = 50;       // The max Distance the enemy can be before it returns to it's spawn
     public int spawnRadius = 10;
 
+    bool isAttacking = false;
     bool reachedTarget = false;
     bool atSpawnArea = true;
     Vector2 spawnpoint;
@@ -49,20 +50,22 @@ public class EnemyAi : MonoBehaviour
         if (!atSpawnArea && (distanceFromSpawn > maxDistanceFromSpawn || distanceFromTarget > forgetDistance))
             ReturnToSpawn();
 
-        else if (!reachedTarget && distanceFromTarget > aStarActivationDistance && distanceFromTarget < forgetDistance)
+
+        else if (reachedTarget && distanceFromTarget > aStarActivationDistance && distanceFromTarget < forgetDistance)
         {
             destinationSetter.targetPosition = Vector2.zero;
             destinationSetter.target = target;
             aiPath.enabled = true;
             speed = aiPath.desiredVelocity.x * 10;
         }
-        else if (distanceFromTarget < aStarActivationDistance)
-        {
-            MoveAroundTarget();
-        }
         else if (distanceFromTarget < targetReachedDistance)
         {
             ReachedTarget();
+            MoveAroundTarget();
+        }
+        else if (distanceFromTarget < aStarActivationDistance)
+        {
+            MoveAroundTarget();
         }
         else if(distanceFromSpawn < spawnRadius)
         {
@@ -81,8 +84,6 @@ public class EnemyAi : MonoBehaviour
     {
         reachedTarget = true;
         aiPath.enabled = false;
-        destinationSetter.target = null;
-
     }
 
     void MoveToTarget()
@@ -93,7 +94,7 @@ public class EnemyAi : MonoBehaviour
     } 
     void MoveAroundTarget()
     {
-
+        rb.velocity = Vector2.zero;
         Debug.Log("Move around target");
     }
 
@@ -109,6 +110,7 @@ public class EnemyAi : MonoBehaviour
     {
         destinationSetter.targetPosition = Vector2.zero;
         aiPath.enabled = false;
+        rb.velocity = Vector2.zero;
     }
 
     private void Flip()
