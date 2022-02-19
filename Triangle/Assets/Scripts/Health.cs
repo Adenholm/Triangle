@@ -7,6 +7,8 @@ using UnityEngine;
  */
 public class Health : MonoBehaviour
 {
+
+
     private Animator animatior;
 
     public int maxHealth = 100;
