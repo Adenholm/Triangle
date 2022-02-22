@@ -8,8 +8,10 @@ public class Collectible : MonoBehaviour
     {
        if(other.gameObject.tag == "Player")
         {
+            
             // add to inventory
             Destroy(gameObject);
+           
         }
     }
 }
