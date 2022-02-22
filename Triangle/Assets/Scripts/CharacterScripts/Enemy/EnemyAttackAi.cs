@@ -24,17 +24,6 @@ public class EnemyAttackAi : MonoBehaviour
 
     public LayerMask enemyLayers;
 
-    public float obstacleDetectionRange = 3f;
-    public LayerMask obstacleLayers;
-
-
-    [Header("Testing stuff")]
-    public Transform target;
-    public Rigidbody2D rb;
-    private Collider2D ownCollider;
-    
-    public int targetAngle;
-
     public Dictionary<int, int> movePattern = new Dictionary<int, int>
     {
         {6, 0},
@@ -50,65 +39,22 @@ public class EnemyAttackAi : MonoBehaviour
         {8, 3},
         {7, 1}
     };
-    private Dictionary<int, int> obstacleAvoiding = new Dictionary<int, int>();
-    private Dictionary<int, int> moveSum = new Dictionary<int, int>();
 
     private Animator animator;
+    private Rigidbody2D rb;
+    private MoveAi moveAi;
 
     private void Start()
     {
         animator = GetComponentInChildren<Animator>();
-        ownCollider = GetComponentInChildren<Collider2D>();
-
-        obstacleAvoiding.Add(0, 0);
-        obstacleAvoiding.Add(1, 1);
-        obstacleAvoiding.Add(2, 2);
-        obstacleAvoiding.Add(3, 3);
-        obstacleAvoiding.Add(4, 9);
-        obstacleAvoiding.Add(5, 2);
-        obstacleAvoiding.Add(6, 0);
-        obstacleAvoiding.Add(7, 2);
-        obstacleAvoiding.Add(8, 12);
-        obstacleAvoiding.Add(9, 3);
-        obstacleAvoiding.Add(10, 2);
-        obstacleAvoiding.Add(11, 1);
+        rb = GetComponent<Rigidbody2D>();
+        moveAi = GetComponent<MoveAi>();
     }
     public void Strafe(Rigidbody2D rb, Transform target)
     {
         if (Time.time >= nextMoveTime)
         {
-
-            Vector2 pos = rb.position;
-
-            Vector2 targetDirection = (Vector2)target.position - pos;
-            targetAngle = ((int)Mathf.Round(Mathf.Atan2(targetDirection.y, targetDirection.x) * Mathf.Rad2Deg / 30) + 6) % 12;
-
-            foreach (int angle in movePattern.Keys)
-            {
-                moveSum[angle] = movePattern[(targetAngle - angle + 12) % 12];
-            }
-
-            Collider2D[] nearbyObstacles = Physics2D.OverlapCircleAll(pos, obstacleDetectionRange, obstacleLayers);
-
-            foreach (Collider2D obstacle in nearbyObstacles)
-            {
-                if (obstacle != ownCollider)
-                {
-                    Vector2 obstacleDirection = obstacle.ClosestPoint(pos) - pos;
-                    int obstacleAngle = ((int)Mathf.Round(Mathf.Atan2(obstacleDirection.y, obstacleDirection.x) * Mathf.Rad2Deg / 30) + 6) % 12;
-                    foreach (int angle in obstacleAvoiding.Keys)
-                    {
-                        moveSum[angle] += obstacleAvoiding[(obstacleAngle - angle + 12) % 12];
-                    }
-                }
-            }
-
-            var sortedElements = moveSum.OrderBy(kvp => kvp.Value);
-
-            int movementAngle = sortedElements.Last().Key;
-            Vector2 movement = (Quaternion.Euler(0, 0, movementAngle * 30) * new Vector3(-1, 0)) * moveSpeed;
-
-            rb.AddForce(movement);
+            moveAi.Move(target, movePattern, moveSpeed);
 
             if (Time.time >= nextAttackTime)
             {
@@ -137,11 +83,8 @@ public class EnemyAttackAi : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        Vector3 pos = new Vector3(rb.position.x, rb.position.y);
-        foreach(int angle in moveSum.Keys)
-        {
-            Gizmos.DrawLine(pos, pos + (Quaternion.Euler(0, 0, angle * 30 - 180) * new Vector3(((float)moveSum[angle])/3 , 0)));
-        }
-        //Gizmos.DrawLine(pos, pos + (Quaternion.Euler(0, 0, targetAngle*30) * new Vector3(-1,0)));
+        if (attackPoint == null) return;
+
+        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
 }

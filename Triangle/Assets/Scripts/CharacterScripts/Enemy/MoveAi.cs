@@ -3,6 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
+/*
+ * A enemy ai-movement script that defines the movement behavoir for enemies when they get close to the player.
+ * It uses a map of different directions with different wheights that represents the way the enemy wants to move in.
+ * It then checks if there's a obstacle or other enmey in the way and then chooses the best way to go.
+ * 
+ * Author Hanna Adenholm
+ */
 public class MoveAi : MonoBehaviour
 {
     public float obstacleDetectionRange = 3f;
@@ -18,16 +25,16 @@ public class MoveAi : MonoBehaviour
     {
         {6, 0},
         {5, 2},
-        {4, 8},
-        {3, 4},
+        {4, 9},
+        {3, 3},
         {2, 2},
         {1, 1},
         {0, 0},
         {11, 1},
         {10, 2},
-        {9, 4},
-        {8, 9},
-        {7, 1}
+        {9, 3},
+        {8, 12},
+        {7, 2}
     };
 
     // Start is called before the first frame update
