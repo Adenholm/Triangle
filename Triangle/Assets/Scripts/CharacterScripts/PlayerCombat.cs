@@ -68,6 +68,6 @@ public class PlayerCombat : MonoBehaviour, IAttackable
 
     public void TakeDamage(int damage, Element element)
     {
-        
+        Debug.Log("You took " + damage + " in damage");
     }
 }

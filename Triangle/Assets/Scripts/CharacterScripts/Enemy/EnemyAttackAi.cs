@@ -3,10 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+/*
+ * A enemy ai-movement script that defines the movement behavoir for enemies when they get close to the player.
+ * It uses a map of different directions with different wheights that represents the way the enemy wants to move in.
+ * It then checks if there's a obstacle or other enmey in the way and then chooses the best way to go.
+ * 
+ * Author Hanna Adenholm
+ */
 public class EnemyAttackAi : MonoBehaviour
 {
     public Transform attackPoint;
-    public float moveSpeed = 3f;
+    public float moveSpeed = 15f;
 
     public float attackRange = 0.5f;
     public int attackDamage = 40;
@@ -34,11 +41,11 @@ public class EnemyAttackAi : MonoBehaviour
         {5, 1},
         {4, 3},
         {3, 5},
-        {2, 9},
+        {2, 10},
         {1, 5},
         {0, 3},
         {11, 5},
-        {10, 18},
+        {10, 13},
         {9, 5},
         {8, 3},
         {7, 1}
@@ -61,7 +68,7 @@ public class EnemyAttackAi : MonoBehaviour
         obstacleAvoiding.Add(5, 2);
         obstacleAvoiding.Add(6, 0);
         obstacleAvoiding.Add(7, 2);
-        obstacleAvoiding.Add(8, 15);
+        obstacleAvoiding.Add(8, 12);
         obstacleAvoiding.Add(9, 3);
         obstacleAvoiding.Add(10, 2);
         obstacleAvoiding.Add(11, 1);
@@ -133,7 +140,7 @@ public class EnemyAttackAi : MonoBehaviour
         Vector3 pos = new Vector3(rb.position.x, rb.position.y);
         foreach(int angle in moveSum.Keys)
         {
-            Gizmos.DrawLine(pos, pos + (Quaternion.Euler(0, 0, angle * 30 - 180) * new Vector3(moveSum[angle]/3 , 0)));
+            Gizmos.DrawLine(pos, pos + (Quaternion.Euler(0, 0, angle * 30 - 180) * new Vector3(((float)moveSum[angle])/3 , 0)));
         }
         //Gizmos.DrawLine(pos, pos + (Quaternion.Euler(0, 0, targetAngle*30) * new Vector3(-1,0)));
     }
