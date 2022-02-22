@@ -92,6 +92,10 @@ public class EnemyAi : MonoBehaviour
                 Flip();
             }
         }
+        else
+        {
+            rb.velocity = Vector3.zero;
+        }
     }
 
 
