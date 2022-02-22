@@ -8,12 +8,16 @@ public class EnemyAi : MonoBehaviour
     public Rigidbody2D rb;
     public Transform target;
     public int forgetDistance = 15;             // The distance from target where the enemy stops attacking and returns to its spawn
-    public int attackDistance = 8;             // The distance from the player where it starts attacking
+    public int attackDistance = 8;              // The distance from the player where it starts attacking
     public int aStarActivationDistance = 6;     // The distance from the target that the pathfinding gets activated again
+    public int reachedTargetDistance = 3;
 
     public int maxDistanceFromSpawn = 50;       // The max Distance the enemy can be before it returns to it's spawn
     public int spawnRadius = 10;
 
+    public bool drawGizmos = false;
+
+    private bool reachedTarget = false;
     private bool isAttacking = false;
     private bool atSpawnArea = true;
     private Vector2 spawnpoint;
@@ -24,12 +28,14 @@ public class EnemyAi : MonoBehaviour
     private Animator animator;
     private PathDestinationSetter destinationSetter;
     private AIPath aiPath;
+    private EnemyAttackAi attackAi;
 
     void Start()
     {
         animator = GetComponentInChildren<Animator>();
         destinationSetter = GetComponent<PathDestinationSetter>();
         aiPath = GetComponent<AIPath>();
+        attackAi = GetComponent<EnemyAttackAi>();
 
         spawnpoint = rb.position;
     }
@@ -46,7 +52,7 @@ public class EnemyAi : MonoBehaviour
             atSpawnArea = distanceFromSpawn < spawnRadius;
 
             float speed = rb.velocity.x;
-
+            float dir = target.position.x - pos.x;
 
             if (!atSpawnArea && (distanceFromSpawn > maxDistanceFromSpawn || distanceFromTarget > forgetDistance))
             {
@@ -58,15 +64,21 @@ public class EnemyAi : MonoBehaviour
                 animator.SetTrigger("Startle");
                 FreezeMovement(Time.time + 1f);
                 isAttacking = true;
+                reachedTarget = true;
             }
-            else if (isAttacking && distanceFromTarget > aStarActivationDistance && distanceFromTarget < forgetDistance)
+            else if (isAttacking && reachedTarget && distanceFromTarget > aStarActivationDistance && distanceFromTarget < forgetDistance)
             {
                 MoveToTarget();
-                speed = aiPath.desiredVelocity.x * 10;
+                speed = Mathf.Abs(aiPath.desiredVelocity.x * 10) * Mathf.Sign(dir);
             }
-            else if (distanceFromTarget < aStarActivationDistance)
+            else if (reachedTarget && distanceFromTarget < aStarActivationDistance)
             {
                 MoveAroundTarget();
+                speed = Mathf.Abs(speed) * Mathf.Sign(dir);
+            }
+            else if(distanceFromTarget < reachedTargetDistance)
+            {
+                reachedTarget = true;
             }
             else if (distanceFromSpawn < spawnRadius)
             {
@@ -85,6 +97,7 @@ public class EnemyAi : MonoBehaviour
 
     void MoveToTarget()
     {
+        reachedTarget = false;
         destinationSetter.targetPosition = Vector2.zero;
         destinationSetter.target = target;
         aiPath.enabled = true;
@@ -92,16 +105,15 @@ public class EnemyAi : MonoBehaviour
     void MoveAroundTarget()
     {
         aiPath.enabled = false;
-        rb.velocity = Vector2.zero;
-        Debug.Log("Move around target");
+        attackAi.Strafe(rb, target);
     }
 
     void ReturnToSpawn()
     {
-        Debug.Log("Return to spawn");
         destinationSetter.targetPosition = spawnpoint;
         aiPath.enabled = true;
         isAttacking = false;
+        reachedTarget = false;
     }
 
     void IdleMovement()
@@ -109,6 +121,7 @@ public class EnemyAi : MonoBehaviour
         destinationSetter.targetPosition = Vector2.zero;
         aiPath.enabled = false;
         rb.velocity = Vector2.zero;
+        reachedTarget = false;
     }
 
     private void Flip()
@@ -127,10 +140,13 @@ public class EnemyAi : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        Gizmos.DrawWireSphere(spawnpoint, maxDistanceFromSpawn);
-        Gizmos.DrawWireSphere(spawnpoint, spawnRadius);
-        Gizmos.DrawWireSphere(rb.position, aStarActivationDistance);
-        Gizmos.DrawWireSphere(rb.position, forgetDistance);
-        Gizmos.DrawWireSphere(rb.position, attackDistance);
+        if (drawGizmos)
+        {
+            Gizmos.DrawWireSphere(spawnpoint, maxDistanceFromSpawn);
+            Gizmos.DrawWireSphere(spawnpoint, spawnRadius);
+            Gizmos.DrawWireSphere(rb.position, aStarActivationDistance);
+            Gizmos.DrawWireSphere(rb.position, forgetDistance);
+            Gizmos.DrawWireSphere(rb.position, attackDistance);
+        }
     }
 }

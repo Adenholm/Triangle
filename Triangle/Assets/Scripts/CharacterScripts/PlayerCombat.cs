@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerCombat : MonoBehaviour
+public class PlayerCombat : MonoBehaviour, IAttackable
 {
     private Animator animator;
     private PlayerMovement pm;
@@ -23,7 +23,7 @@ public class PlayerCombat : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        animator = GetComponent<Animator>();
+        animator = GetComponentInChildren<Animator>();
         pm = GetComponent<PlayerMovement>();
     }
 
@@ -64,5 +64,10 @@ public class PlayerCombat : MonoBehaviour
         if (attackPoint == null) return;
 
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
+    }
+
+    public void TakeDamage(int damage, Element element)
+    {
+        
     }
 }
