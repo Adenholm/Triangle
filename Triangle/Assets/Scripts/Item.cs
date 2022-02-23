@@ -1,31 +1,69 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Item
-{
-    public int id;
-    public string title;
-    public string description;
-    public Sprite icon;
-    public Dictionary<string, int> stats = new Dictionary<string, int>();
-    
 
-    public Item(int id, string title, string description, Sprite icon, Dictionary<string,int> stats)
+[Serializable]
+public class Item : MonoBehaviour
+{
+
+    public ItemType itemType;
+    public int amount;
+
+  public enum ItemType
     {
-        this.id = id;
-        this.title = title;
-        this.description = description;
-        this.icon = icon;
-        this.stats = stats;
+        Wood,
+        Iron,
+        Fur,
+        Crystal,
+        Sword,
+        Bow,
+        Armour,
+        Firemeat,
+        Watermeat,
+        Airmeat,
+        Plantmeat
     }
 
-    public Item(Item item)
+    public Sprite GetSprite()
     {
-        this.id = item.id;
-        this.title = item.title;
-        this.description = item.description;
-        this.icon = item.icon;
-        this.stats = item.stats;
+        switch (itemType)
+        {
+            default:
+            case ItemType.Wood: return ItemAssets.Instance.woodSprite;
+            case ItemType.Iron: return ItemAssets.Instance.ironSprite;
+            case ItemType.Fur: return ItemAssets.Instance.furSprite;
+            case ItemType.Crystal: return ItemAssets.Instance.crystalSprite;
+            case ItemType.Sword: return ItemAssets.Instance.swordSprite;
+            case ItemType.Bow: return ItemAssets.Instance.bowSprite;
+            case ItemType.Armour: return ItemAssets.Instance.armourSprite;
+            case ItemType.Firemeat: return ItemAssets.Instance.firemeatSprite;
+            case ItemType.Watermeat: return ItemAssets.Instance.watermeatSprite;
+            case ItemType.Airmeat: return ItemAssets.Instance.airmeatSprite;
+            case ItemType.Plantmeat: return ItemAssets.Instance.plantmeatSprite;
+        }
+    }
+
+
+    public bool IsStackable()
+    {
+        switch (itemType)
+        {
+            default:
+            case ItemType.Wood:
+            case ItemType.Iron:
+            case ItemType.Fur:
+            case ItemType.Crystal:
+            case ItemType.Firemeat:
+            case ItemType.Watermeat:
+            case ItemType.Airmeat:
+            case ItemType.Plantmeat:
+                return true;
+            case ItemType.Sword:
+            case ItemType.Bow:
+            case ItemType.Armour:
+                return false;
+        }
     }
 }
