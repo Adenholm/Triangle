@@ -15,6 +15,11 @@ public class PlayerItemInteraction : MonoBehaviour
 
     }
 
+    public Inventory GetInventory()
+    {
+        return inventory;
+    }
+
     private void OnTriggerEnter2D(Collider2D collider)
     {
         ItemWorld itemworld = collider.GetComponent<ItemWorld>();

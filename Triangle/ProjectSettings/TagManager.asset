@@ -5,6 +5,17 @@ TagManager:
   serializedVersion: 2
   tags:
   - Collectable
+  - Wood
+  - Iron
+  - Fur
+  - Crystal
+  - Sword
+  - Bow
+  - Armour
+  - Firemeat
+  - Watermeat
+  - Airmeat
+  - Plantmeat
   layers:
   - Default
   - TransparentFX

@@ -10,7 +10,6 @@ public class UiInventory : MonoBehaviour
     private Transform itemSlotContainer;
     private Transform itemSlotTemplate;
 
-
     public void Awake()
     {
         itemSlotContainer = transform.Find("itemSlotContainer");
@@ -18,13 +17,15 @@ public class UiInventory : MonoBehaviour
     }
 
  
+
+
     public void SetInventory(Inventory inventory)
     {
         this.inventory = inventory;
 
         inventory.OnItemListChanged += Inventory_OnItemListChanged;
 
-        RefreshInventoryItems();
+        //RefreshInventoryItems();
     }
 
     private void Inventory_OnItemListChanged(object sender, System.EventArgs e)
@@ -34,14 +35,14 @@ public class UiInventory : MonoBehaviour
 
     private void RefreshInventoryItems()
     {
-        /**
+       
         foreach (Transform child in itemSlotContainer)
         {
+           
             if( child == itemSlotTemplate) continue;
             Destroy(child.gameObject);
 
         }
-        **/
 
         int x = 0;
         int y = 0;
@@ -56,6 +57,7 @@ public class UiInventory : MonoBehaviour
 
             Image image = itemSlotRectTransform.Find("image").GetComponent<Image>();
             image.sprite = item.GetSprite();
+
             TextMeshProUGUI uitext = itemSlotRectTransform.Find("amount").GetComponent<TextMeshProUGUI>();
             if (item.amount > 1)
             {

@@ -45,6 +45,71 @@ public class Item : MonoBehaviour
         }
     }
 
+    
+    public bool IsCraftItem()
+    {
+        switch (itemType)
+        {
+        default:
+        case ItemType.Wood:
+        case ItemType.Iron:
+        case ItemType.Fur:
+            return true;
+        case ItemType.Crystal:
+        case ItemType.Firemeat:
+        case ItemType.Watermeat:
+        case ItemType.Airmeat:
+        case ItemType.Plantmeat:
+        case ItemType.Sword:
+        case ItemType.Bow:
+        case ItemType.Armour:
+            return false;
+        }
+        
+    }
+
+    public bool IsEatItem()
+    {
+        switch (itemType)
+        {
+            default:
+            case ItemType.Firemeat:
+            case ItemType.Watermeat:
+            case ItemType.Airmeat:
+            case ItemType.Plantmeat:
+                return true;
+            case ItemType.Wood:
+            case ItemType.Iron:
+            case ItemType.Fur:
+            case ItemType.Crystal:
+            case ItemType.Sword:
+            case ItemType.Bow:
+            case ItemType.Armour:
+                return false;
+        }
+
+    }
+    public bool IsEquipItem()
+    {
+        switch (itemType)
+        {
+            default:
+            case ItemType.Sword:
+            case ItemType.Bow:
+            case ItemType.Armour:
+                return true;
+            case ItemType.Wood:
+            case ItemType.Iron:
+            case ItemType.Fur:
+            case ItemType.Crystal:
+            case ItemType.Firemeat:
+            case ItemType.Watermeat:
+            case ItemType.Airmeat:
+            case ItemType.Plantmeat:
+                return false;
+        }
+
+    }
 
     public bool IsStackable()
     {
