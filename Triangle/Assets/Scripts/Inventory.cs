@@ -72,14 +72,30 @@ public class Inventory
 
     public void RemoveItems(List<Item> removeList)
     {
-        foreach (Item item in removeList)
+        foreach (Item itemremove in removeList)
         {
-            int amount = item.amount;
-
-            foreach (int i in Enumerable.Range(0, amount))
+            int index = 0;
+            
+            foreach(Item iteminventory in itemList)
             {
-                /////////////////////////////////////////////////////////////////////////////////////
+                
+
+                if(itemremove.itemType == iteminventory.itemType)
+                {
+                    if (iteminventory.amount>1)
+                    {
+                        iteminventory.amount -= 1;
+                        break;
+                    }
+
+                    itemList.RemoveAt(index);
+                    break;
+
+                }
+
+                index += 1;
             }
         }
+        OnItemListChanged?.Invoke(this, EventArgs.Empty);
     }
 }

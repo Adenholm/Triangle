@@ -36,11 +36,10 @@ public class CraftInventory : MonoBehaviour
                 if (resultItem.itemType != Item.ItemType.None)
                 {
                     uiCraft.ShowResultItem(resultItem);
-
                 }
                 
                 break;
-            case 2:
+            case >=2:
                 Debug.Log("Full");
                 break;
         }
@@ -74,6 +73,7 @@ public class CraftInventory : MonoBehaviour
     {
         craftList.RemoveAt(i);
     }
+
 
     public void HideSlots()
     {

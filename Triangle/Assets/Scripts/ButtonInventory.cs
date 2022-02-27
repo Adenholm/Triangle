@@ -18,7 +18,9 @@ public class ButtonInventory : MonoBehaviour
         inventory = player.GetInventory();
 
         Image image = transform.Find("image").GetComponent<Image>();
+        Image backround = transform.Find("Backround-slot").GetComponent<Image>();
         Sprite sprite = image.sprite;
+       // IsActive active = gameObject.GetComponent<IsActive>();
 
         foreach (Item item in inventory.GetItemList())
         {
@@ -26,12 +28,10 @@ public class ButtonInventory : MonoBehaviour
             if (sprite == item.GetSprite())
             {
                 
+
                 if (item.IsCraftItem())
                 {
-                    //Craftfunktion
-                    //item appears in craftsystem
-                    //if crafting is commited new item into inventory, old disapears
-                    Debug.Log("craft");
+                    //active.SetColorActive();
                     craftinventory.AddItem(item);
                     break;
                 }
