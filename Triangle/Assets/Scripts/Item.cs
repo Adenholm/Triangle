@@ -23,7 +23,8 @@ public class Item : MonoBehaviour
         Firemeat,
         Watermeat,
         Airmeat,
-        Plantmeat
+        Plantmeat,
+        None
     }
 
     public Sprite GetSprite()

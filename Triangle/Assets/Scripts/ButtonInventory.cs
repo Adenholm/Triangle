@@ -5,12 +5,14 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public class Button : MonoBehaviour
+public class ButtonInventory : MonoBehaviour
 {
     
     public PlayerItemInteraction player;
     public Inventory inventory;
+    public CraftInventory craftinventory;
 
+ 
     public void UseItem()
     {
         inventory = player.GetInventory();
@@ -30,6 +32,7 @@ public class Button : MonoBehaviour
                     //item appears in craftsystem
                     //if crafting is commited new item into inventory, old disapears
                     Debug.Log("craft");
+                    craftinventory.AddItem(item);
                     break;
                 }
 
@@ -66,5 +69,8 @@ public class Button : MonoBehaviour
         }
 
     }
+
+
+
 
 }
