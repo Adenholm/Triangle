@@ -104,9 +104,10 @@ MonoBehaviour:
   enemyLayers:
     serializedVersion: 2
     m_Bits: 0
-  attackRange: 0.5
-  attackDamage: 40
+  elementAttackRate: 0.2
   attakRate: 0.5
+  power: 1
+  maxHealth: 100
 --- !u!1 &8261237236320372540
 GameObject:
   m_ObjectHideFlags: 0

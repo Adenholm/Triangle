@@ -7,7 +7,8 @@ public class Enemy : MonoBehaviour, IAttackable
 {
     [Header("Battle")]
     public Element element;
-    public LayerMask enemyLayers;
+    public LayerMask attackTargets;
+    public LayerMask fellowEnemies;
 
     private Transform target;
 
@@ -33,6 +34,22 @@ public class Enemy : MonoBehaviour, IAttackable
     private bool isFacingLeft = true;
 
 
+    [Header("Particle Effects")]
+    public GameObject poisonPartciels;
+    public GameObject fireParticles;
+    public GameObject lightningParticles;
+    public GameObject waterParticles;
+    public GameObject iceParticles;
+    public GameObject plantParticles;
+    public GameObject steamParticles;
+    public GameObject hitParticles;
+
+    private int timesDamageIsTaken = 0;
+    private int damageTakenOverTime = 0;
+    private bool isAlreadyStruck = false;
+    private GameObject damagingParticles;
+
+
     private Rigidbody2D rb;
     private Animator animator;
     private Health health;
@@ -54,7 +71,7 @@ public class Enemy : MonoBehaviour, IAttackable
     // Update is called once per frame
     void Update()
     {
-        Collider2D collider = Physics2D.OverlapCircle(rb.position, detectionradius, enemyLayers);
+        Collider2D collider = Physics2D.OverlapCircle(rb.position, detectionradius, attackTargets);
         if (collider != null)
         {
             if (target != collider.transform)
@@ -118,6 +135,8 @@ public class Enemy : MonoBehaviour, IAttackable
         {
             Flip();
         }
+
+        
     }
 
     private void IdleMovement()
@@ -128,7 +147,6 @@ public class Enemy : MonoBehaviour, IAttackable
     private void ReturnToSpawn()
     {
         target = null;
-        aiPath.stopMovingTowardsTarget();
         aiPath.moveTowardsTarget(spawnpoint);
     }
 
@@ -148,7 +166,99 @@ public class Enemy : MonoBehaviour, IAttackable
 
     public void TakeDamage(int damage, Element element)
     {
-        health.TakeDamage(damage, element);
+        switch (element)
+        {
+            case Element.POISON:
+                damagingParticles = poisonPartciels;
+                timesDamageIsTaken = (int)(5 * ElementHandler.DamageConverter(this.element, element));
+                damageTakenOverTime = (int)(damage * ElementHandler.DamageConverter(this.element, element));
+                StartCoroutine("DamageOverTime");
+                break;
+            case Element.FIRE:
+            case Element.FIREWALL:
+                damagingParticles = fireParticles;
+                timesDamageIsTaken = (int)(5 * ElementHandler.DamageConverter(this.element, element));
+                damageTakenOverTime = (int)(damage * ElementHandler.DamageConverter(this.element, element));
+                StartCoroutine("DamageOverTime");
+                break;
+
+            case Element.LIGHTNING:
+                if (!isAlreadyStruck)
+                {
+                    spawnParticle(Instantiate(lightningParticles));
+                    health.TakeDamage((int)(damage * ElementHandler.DamageConverter(this.element, element)));
+
+                    Collider2D[] hitFellowEnemies = Physics2D.OverlapCircleAll(rb.position, 2f, fellowEnemies);
+                    foreach (Collider2D enemy in hitFellowEnemies)
+                    {
+                        enemy.GetComponent<IAttackable>().TakeDamage(damage, Element.LIGHTNING);
+                    }
+                    isAlreadyStruck = true;
+                }
+                break;
+
+            case Element.ICE:
+                health.TakeDamage((int)(damage * ElementHandler.DamageConverter(this.element, element)));
+                FreezeMovement(Time.time + 3f * ElementHandler.DamageConverter(this.element, element));
+                spawnParticle(Instantiate(iceParticles));
+                break;
+
+            case Element.PLANTTHROW:
+            case Element.PLANT:
+                health.TakeDamage((int)(damage * ElementHandler.DamageConverter(this.element, element)));
+                FreezeMovement(Time.time + 3f * ElementHandler.DamageConverter(this.element, element));
+                spawnParticle(Instantiate(plantParticles));
+                break;
+
+            case Element.STEAM:
+                health.TakeDamage((int)(damage * ElementHandler.DamageConverter(this.element, element)));
+                spawnParticle(Instantiate(steamParticles));
+                break;
+
+            case Element.WATER:
+                health.TakeDamage((int)(damage * ElementHandler.DamageConverter(this.element, element)));
+                spawnParticle(Instantiate(waterParticles));
+                break;
+
+            default:
+                health.TakeDamage((int)(damage * ElementHandler.DamageConverter(this.element, element)));
+                spawnParticle(Instantiate(hitParticles));
+                break;
+        }
+    }
+
+
+
+    IEnumerator DamageOverTime()
+    {
+        for(int i = 0; i < timesDamageIsTaken; i++)
+        {
+            health.TakeDamage(damageTakenOverTime);
+            spawnParticle(Instantiate(damagingParticles));
+            yield return new WaitForSeconds(2f);
+        }
+    }
+
+    private GameObject spawnParticle(GameObject particles)
+    {
+        particles.transform.SetParent(this.transform);
+        particles.transform.position = rb.position;
+
+        particles.SetActive(true);
+
+        ParticleSystem ps = particles.GetComponent<ParticleSystem>();
+
+        if (ps != null)
+        {
+            var main = ps.main;
+            if (main.loop)
+            {
+                ps.gameObject.AddComponent<CFX_AutoStopLoopedEffect>();
+                ps.gameObject.AddComponent<CFX_AutoDestructShuriken>();
+            }
+        }
+
+        return particles;
     }
 
     private void OnDrawGizmosSelected()

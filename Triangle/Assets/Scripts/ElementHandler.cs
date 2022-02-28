@@ -33,8 +33,8 @@ public static class ElementHandler
         }
     }
 
-    public static double DamageConverter(Element ownElem, Element damagingElem)
+    public static float DamageConverter(Element ownElem, Element damagingElem)
     {
-        return 1;
+        return 1f;
     }
 }

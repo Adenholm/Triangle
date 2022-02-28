@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IElementAttack
 {
-    public void Attack(int damage);
+    public void Attack(float power, LayerMask enemyLayers);
 }

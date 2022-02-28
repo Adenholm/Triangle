@@ -589,7 +589,7 @@ MonoBehaviour:
   m_BoneTransforms:
   - {fileID: 1216194535462458513}
   m_Bounds:
-    m_Center: {x: 0.00093758106, y: 0, z: 0}
+    m_Center: {x: 0.00092995167, y: 0, z: 0}
     m_Extent: {x: 1.3329298, y: 1.8699999, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
@@ -707,8 +707,8 @@ MonoBehaviour:
   - {fileID: 2349423973409554199}
   - {fileID: 7554785161096943159}
   m_Bounds:
-    m_Center: {x: 0.00000333786, y: 0.00095009804, z: 0}
-    m_Extent: {x: 7.2300043, y: 2.31095, z: 0}
+    m_Center: {x: 0.0000014305115, y: 0.00095391273, z: 0}
+    m_Extent: {x: 7.2300005, y: 2.31095, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
   m_AutoRebind: 0
@@ -944,8 +944,8 @@ MonoBehaviour:
   - {fileID: 6411234976468634421}
   - {fileID: 5078484089344869169}
   m_Bounds:
-    m_Center: {x: -0.0018026829, y: 0.003200531, z: 0}
-    m_Extent: {x: 2.0791092, y: 3.8154001, z: 0}
+    m_Center: {x: -0.0018084049, y: 0.0032010078, z: 0}
+    m_Extent: {x: 2.0791073, y: 3.8153987, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
   m_AutoRebind: 0
@@ -1153,8 +1153,8 @@ MonoBehaviour:
   - {fileID: 6887861136647885429}
   - {fileID: 7253396027107285765}
   m_Bounds:
-    m_Center: {x: 0.0013697147, y: 0.00999999, z: 0}
-    m_Extent: {x: 1.53863, y: 3.9899983, z: 0}
+    m_Center: {x: 0.0013709068, y: 0.009999037, z: 0}
+    m_Extent: {x: 1.5386293, y: 3.9900007, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
   m_AutoRebind: 0
@@ -1296,8 +1296,8 @@ MonoBehaviour:
   - {fileID: 7554785161096943159}
   - {fileID: 7413729749817216280}
   m_Bounds:
-    m_Center: {x: 0.0027002096, y: 0.010000706, z: 0}
-    m_Extent: {x: 1.1127001, y: 4.209999, z: 0}
+    m_Center: {x: 0.002703905, y: 0.010003567, z: 0}
+    m_Extent: {x: 1.1127, y: 4.2099996, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
   m_AutoRebind: 0
@@ -1438,8 +1438,8 @@ MonoBehaviour:
   - {fileID: 4301480528583608372}
   - {fileID: 7253396027107285765}
   m_Bounds:
-    m_Center: {x: -0.003000021, y: 0.009999752, z: 0}
-    m_Extent: {x: 1.6337798, y: 3.8399987, z: 0}
+    m_Center: {x: -0.003000021, y: 0.010001421, z: 0}
+    m_Extent: {x: 1.6337798, y: 3.8399985, z: 0}
   m_UseBatching: 1
   m_AlwaysUpdate: 1
   m_AutoRebind: 0
@@ -1701,9 +1701,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   element: 0
-  enemyLayers:
+  attackTargets:
     serializedVersion: 2
     m_Bits: 256
+  fellowEnemies:
+    serializedVersion: 2
+    m_Bits: 128
   detectionradius: 8
   abandonDistance: 15
   pathfindingActivationDistance: 6
@@ -1711,6 +1714,14 @@ MonoBehaviour:
   spawnRadius: 10
   maxDistanceFromSpawn: 50
   drawGizmos: 0
+  poisonPartciels: {fileID: 100004, guid: 7867af58a6ec48846ae807eb4022fbaa, type: 3}
+  fireParticles: {fileID: 100004, guid: 1c20c7996d683754db1f0f62a361952c, type: 3}
+  lightningParticles: {fileID: 1628744458893394, guid: e243632bb3aff9549abdcfcc2ef0c4f0, type: 3}
+  waterParticles: {fileID: 1687118924408352, guid: 77c69ec12208c4c4380d15e30b6f8f68, type: 3}
+  iceParticles: {fileID: 100000, guid: f2dba9e16cd347f44a395b8204544ee5, type: 3}
+  plantParticles: {fileID: 0}
+  steamParticles: {fileID: 100000, guid: 83cd9cc9f9c88824ba18dc59b05ae328, type: 3}
+  hitParticles: {fileID: 100002, guid: e9391f622091e1449bdef4ef15af4948, type: 3}
 --- !u!114 &5610437431847242977
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -35,6 +35,8 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Time.time >= nextMoveTime)
         {
+            rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+
             if (movement.x != 0 && movement.y != 0)
             {
                 movement *= moveLimiter;
@@ -52,6 +54,8 @@ public class PlayerMovement : MonoBehaviour
     public void FreezeMovement(float nextMoveTime)
     {
         this.nextMoveTime = nextMoveTime;
+        rb.velocity = Vector2.zero;
+        rb.constraints = RigidbodyConstraints2D.FreezeAll;
     }
 
     private void Flip()

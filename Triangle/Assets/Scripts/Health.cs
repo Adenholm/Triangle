@@ -9,21 +9,23 @@ public class Health : MonoBehaviour
 {
 
 
-    private Animator animatior;
+    private Animator animator;
 
     public int maxHealth = 100;
     private int currentHealth;
 
     void Start()
     {
-        animatior = GetComponentInChildren<Animator>();
+        animator = GetComponentInChildren<Animator>();
         currentHealth = maxHealth;
     }
 
-    public void TakeDamage(int damage, Element element)
+    public void TakeDamage(int damage)
     {
         Debug.Log("Enemy took damage");
         currentHealth -= damage;
+        if (animator != null)
+            animator.SetTrigger("Hurt");
 
         if (currentHealth <= 0)
         {
@@ -36,10 +38,13 @@ public class Health : MonoBehaviour
         //TODO 
 
         Debug.Log("Enemy died");
+        if(animator != null)
+            animator.SetTrigger("Die");
         //Die animation
 
         //Drop Items
 
         //Disable
+        Destroy(gameObject, 5f);
     }
 }
