@@ -8,19 +8,23 @@ using UnityEngine.UI;
 public class ButtonInventory : MonoBehaviour
 {
     
-    public PlayerItemInteraction player;
-    public Inventory inventory;
+    public PlayerItemInteraction playeritem;
+    public PlayerElementInteraction playerelement;
+    
     public CraftInventory craftinventory;
 
- 
+    private Inventory inventory;
+
     public void UseItem()
     {
-        inventory = player.GetInventory();
+        inventory = playeritem.GetInventory();
 
+        //Get itemType of clicked Image
         Image image = transform.Find("image").GetComponent<Image>();
         Image backround = transform.Find("Backround-slot").GetComponent<Image>();
         Sprite sprite = image.sprite;
        // IsActive active = gameObject.GetComponent<IsActive>();
+
 
         foreach (Item item in inventory.GetItemList())
         {
@@ -38,12 +42,12 @@ public class ButtonInventory : MonoBehaviour
 
                 if (item.IsEatItem())
                 {
-                    //Eatfunction
-                    //diffrent sprites for meat
-                    //Delet from Inventory
-                    //Flash Player
-                    //Change Element
                     Debug.Log("Eat");
+                    Element2.ElementType newElementType = item.GetElementType();
+                    playerelement.SetElement(newElementType);
+
+                    //elementui.RefreshUi();
+                    
                     break;
                 }
 
