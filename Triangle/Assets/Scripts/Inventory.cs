@@ -9,11 +9,13 @@ public class Inventory
     public event EventHandler OnItemListChanged;
     private List<Item> itemList;
 
+
     public Inventory()
     {
         itemList = new List<Item>();
 
     }
+
 
     public void AddItem(Item item)
     {
@@ -57,14 +59,43 @@ public class Inventory
             {
                 Vector3 vector1 = new Vector3(x, 0);
                 item.amount = 1;
-                ItemWorld.SpawnItemWorld(position + vector1,item);
-                x = x+ 2f;
+                ItemWorld.SpawnItemWorld(position + vector1, item);
+                x = x + 2f;
             }
-            
+
         }
     }
     public List<Item> GetItemList()
     {
         return itemList;
+    }
+
+    public void RemoveItems(List<Item> removeList)
+    {
+        foreach (Item itemremove in removeList)
+        {
+            int index = 0;
+            
+            foreach(Item iteminventory in itemList)
+            {
+                
+
+                if(itemremove.itemType == iteminventory.itemType)
+                {
+                    if (iteminventory.amount>1)
+                    {
+                        iteminventory.amount -= 1;
+                        break;
+                    }
+
+                    itemList.RemoveAt(index);
+                    break;
+
+                }
+
+                index += 1;
+            }
+        }
+        OnItemListChanged?.Invoke(this, EventArgs.Empty);
     }
 }

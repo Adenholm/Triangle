@@ -23,7 +23,8 @@ public class Item : MonoBehaviour
         Firemeat,
         Watermeat,
         Airmeat,
-        Plantmeat
+        Plantmeat,
+        None
     }
 
     public Sprite GetSprite()
@@ -45,7 +46,25 @@ public class Item : MonoBehaviour
         }
     }
 
-    
+    public Element2.ElementType GetElementType()
+    {
+        switch (itemType)
+        {
+            default:
+            case ItemType.Wood: return Element2.ElementType.None;
+            case ItemType.Iron: return Element2.ElementType.None;
+            case ItemType.Fur: return Element2.ElementType.None;
+            case ItemType.Crystal: return Element2.ElementType.None;
+            case ItemType.Sword: return Element2.ElementType.None;
+            case ItemType.Bow: return Element2.ElementType.None;
+            case ItemType.Armour: return Element2.ElementType.None;
+            case ItemType.Firemeat: return Element2.ElementType.Fire;
+            case ItemType.Watermeat: return Element2.ElementType.Water;
+            case ItemType.Airmeat: return Element2.ElementType.Air;
+            case ItemType.Plantmeat: return Element2.ElementType.Plant;
+        }
+    }
+
     public bool IsCraftItem()
     {
         switch (itemType)
