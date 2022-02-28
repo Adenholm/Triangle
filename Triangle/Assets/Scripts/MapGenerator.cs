@@ -111,6 +111,7 @@ public class MapGenerator : MonoBehaviour
             {
 				Instantiate(player, new Vector3(x - width / 2, y - height / 2, 0), Quaternion.identity);
 				set = true;
+				break;
 			} else
             {
 				x = rnd.Next(1, width);
