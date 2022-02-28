@@ -45,6 +45,6 @@ public class Health : MonoBehaviour
         //Drop Items
 
         //Disable
-        Destroy(gameObject, 5f);
+        Destroy(gameObject, 3f);
     }
 }

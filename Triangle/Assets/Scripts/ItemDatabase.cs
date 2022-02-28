@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 public class ItemDatabase : MonoBehaviour
 {
-    public List<Item> items = new List<Item>();
+    /*public List<Item> items = new List<Item>();
     void Awake()
     {
         BuildItemDatabase();
@@ -18,7 +18,7 @@ public class ItemDatabase : MonoBehaviour
     }
     void BuildItemDatabase()
     {
-        /*items = new List<Item>()
+        items = new List<Item>()
         {
             new Item(1, "Crystal", "to open portal", new Dictionary<string, int> {
                 { "Power", 15 },
@@ -33,6 +33,6 @@ public class ItemDatabase : MonoBehaviour
                 { "Power", 8 },
                 { "Defence", 10 }
             })
-        };*/
-    }
+        };
+    }*/
 }
