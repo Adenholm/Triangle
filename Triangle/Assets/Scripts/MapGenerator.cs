@@ -66,12 +66,12 @@ public class MapGenerator : MonoBehaviour
 
 	void Update()
 	{
-		/*
-		if (Input.GetMouseButtonDown(0))
+		
+		if (Input.GetKey("t"))
 		{
 			GenerateMap();
 		}
-		*/
+		
 	}
 
 	void GenerateMap()
@@ -193,7 +193,8 @@ public class MapGenerator : MonoBehaviour
 		setDragon(dragonFire);
 
 		setFlora1(greenTree1, greenTree2, bush1, bush2, bush3, bush4, bushTiny1, bushTiny2, bushTiny3);
-		// setFlora2(blueTree1, blueTree2, bushDark1, bushDark2, bushDarkT1, bushDarkT2);
+		// setFlora2(blueTree1, blueTree2, bushDark1, bushDark2, bushDarkT1, bushDarkT2); // Breaks unity
+		setFlora3();
 	}
 
 	void setDragon(GameObject dragon1)
@@ -220,9 +221,9 @@ public class MapGenerator : MonoBehaviour
 		System.Random rnd = new System.Random();
 		int x, x1, dx, ddx = 0;
 		int y, y1, dy, ddy = 0;
-		int d1 = 8;
-		int d2 = 3;
-		int d3 = 2;
+		int d1 = 20;
+		int d2 = 8;
+		int d3 = 5;
 		int sw, sw1 = 0;
 
         for (int i = 0; i < treeNumbers;)
@@ -234,7 +235,7 @@ public class MapGenerator : MonoBehaviour
 				Instantiate(gTree1, new Vector3(x - ((float)width / 2.0f), y - ((float)height / 2.0f), 0), Quaternion.identity);
 				i++;
 
-                for (int i1 = 0; i1 < tree2Numbers; i1++)
+                for (int i1 = 0; i1 < tree2Numbers;)
                 {
 					x1 = x + rnd.Next(-d1, d1);
 					y1 = y + rnd.Next(-d1, d1);
@@ -323,7 +324,90 @@ public class MapGenerator : MonoBehaviour
 		}
 	}
 
+	void setFlora3()
+    {
+		System.Random rnd = new System.Random();
+		int x, dx, ddx = 0;
+		int y, dy, ddy = 0;
+		int d1 = 18;
+		int d2 = 10;
+		int d3 = 7;
+		int sw, sw1 = 0;
+		for (int i = 0; i < treeNumbers;)
+		{
+			x = rnd.Next(0, width);
+			y = rnd.Next(0, height);
+			if (collisionMap[x, y] == 0)
+			{
+				Instantiate(blueTree1, new Vector3(x - ((float)width / 2.0f), y - ((float)height / 2.0f), 0), Quaternion.identity);
+				i++;
 
+				dx = x + rnd.Next(-d1, d1);
+				dy = y + rnd.Next(-d1, d1);
+				if (IsInMapRange(dx, dy))
+				{
+					if (collisionMap[dx, dy] == 0)
+					{
+						Instantiate(blueTree2, new Vector3(dx - ((float)width / 2.0f), dy - ((float)height / 2.0f), 0), Quaternion.identity);
+					}
+				}
+
+				sw = rnd.Next(1, 3);
+				for (int i2 = 0; i2 < bushNumbers;)
+				{
+					dx = x + rnd.Next(-d2, d2);
+					dy = y + rnd.Next(-d2, d2);
+					if (IsInMapRange(dx, dy))
+					{
+						if (collisionMap[dx, dy] == 0)
+						{
+							switch (sw)
+							{
+								case 1:
+									Instantiate(bushDark1, new Vector3(dx - ((float)width / 2.0f), dy - ((float)height / 2.0f), 0), Quaternion.identity);
+									sw = rnd.Next(1, 3);
+									i2++;
+									break;
+								case 2:
+									Instantiate(bushDark2, new Vector3(dx - ((float)width / 2.0f), dy - ((float)height / 2.0f), 0), Quaternion.identity);
+									sw = rnd.Next(1, 3);
+									i2++;
+									break;
+							}
+							sw1 = rnd.Next(1, 3);
+							for (int i3 = 0; i3 < tinyBushNumbers; i3++)
+							{
+								ddx = dx + rnd.Next(-d3, d3);
+								ddy = dy + rnd.Next(-d3, d3);
+								if (IsInMapRange(ddx, ddy))
+								{
+									if (collisionMap[ddx, ddy] == 0)
+									{
+										switch (sw1)
+										{
+											case 1:
+												Instantiate(bushDarkT1, new Vector3(ddx - ((float)width / 2.0f), ddy - ((float)height / 2.0f), 0), Quaternion.identity);
+												sw1 = rnd.Next(1, 3);
+												break;
+											case 2:
+												Instantiate(bushDarkT2, new Vector3(ddx - ((float)width / 2.0f), ddy - ((float)height / 2.0f), 0), Quaternion.identity);
+												sw1 = rnd.Next(1, 3);
+												break;
+										}
+									}
+								}
+
+
+							}
+						}
+					}
+
+				}
+			}
+
+		}
+
+	}
 	void setFlora2(GameObject bTree1, GameObject bTree2, GameObject b1, GameObject b2, GameObject bT1, GameObject bT2)
 	{
 		System.Random rnd = new System.Random();
@@ -343,7 +427,7 @@ public class MapGenerator : MonoBehaviour
 				Instantiate(bTree1, new Vector3(x - ((float)width / 2.0f), y - ((float)height / 2.0f), 0), Quaternion.identity);
 				i++;
 
-				for (int i1 = 0; i1 < tree2Numbers; i1++)
+				for (int i1 = 0; i1 < tree2Numbers;)
 				{
 					x1 = x + rnd.Next(-d1, d1);
 					y1 = y + rnd.Next(-d1, d1);
