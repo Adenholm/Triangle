@@ -18,7 +18,7 @@ public class PlayerCombat : MonoBehaviour, IAttackable
 
     public float power = 1f;
 
-    [Header("Helath")]
+    [Header("Health")]
     public int maxHealth = 100;
     private int currentHealth;
 
@@ -27,6 +27,13 @@ public class PlayerCombat : MonoBehaviour, IAttackable
 
     public ElementUI elementui;
 
+    public float armourBuffer = 0.7f;
+
+    public GameObject weaponSprite;
+    private bool weaponIsEquiped = false;
+    public bool armorIsEquiped = false;
+    private SortRenderer sortRenderer;
+
 
     // Start is called before the first frame update
     void Start()
@@ -34,6 +41,7 @@ public class PlayerCombat : MonoBehaviour, IAttackable
         animator = GetComponentInChildren<Animator>();
         pm = GetComponent<PlayerMovement>();
         elementAttacks = GetComponents<IElementAttack>();
+        sortRenderer = GetComponent<SortRenderer>();
 
         currentHealth = maxHealth;
     }
@@ -41,7 +49,7 @@ public class PlayerCombat : MonoBehaviour, IAttackable
     // Update is called once per frame
     void Update()
     {
-        if (Time.time >= nextAttackTime && weapon != null && Input.GetKeyDown(KeyCode.Mouse0))
+        if (Time.time >= nextAttackTime && weapon != null && Input.GetKeyDown(KeyCode.Mouse0) && weaponIsEquiped)
         {
             Attack();
             nextAttackTime = Time.time + 1f / attakRate;
@@ -69,11 +77,14 @@ public class PlayerCombat : MonoBehaviour, IAttackable
 
     public void TakeDamage(int damage, Element element)
     {
+        if (armorIsEquiped)
+            damage = (int)(damage * armourBuffer);
+
         damage = (int)(damage * ElementHandler.DamageConverter(activeElement, element));
         currentHealth -= damage;
         Debug.Log(currentHealth);
         Debug.Log(currentHealth / (float)maxHealth);
-        //UIHealthbar.instance.SetValue(currentHealth / (float)maxHealth);
+        UIHealthbar.instance.SetValue(currentHealth / (float)maxHealth);
 
         Debug.Log("You took " + damage + " in damage");
 
@@ -93,6 +104,13 @@ public class PlayerCombat : MonoBehaviour, IAttackable
         if (attackPoint == null || weapon == null) return;
 
         Gizmos.DrawWireSphere(attackPoint.position, weapon.attackRange);
+    }
+
+    public void EquipWeapon()
+    {
+        weaponIsEquiped = true;
+        weaponSprite.active = true;
+        sortRenderer.Rerun();
     }
 
     public void SetElement(Element newElement)

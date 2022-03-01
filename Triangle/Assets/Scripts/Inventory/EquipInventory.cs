@@ -30,6 +30,8 @@ public class EquipInventory : MonoBehaviour
         {
             weaponitem = item;
             uiequip.ShowWeaponItem(item);
+            PlayerCombat pc = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCombat>();
+            pc.EquipWeapon();
             //change weopon on player
         }
         
@@ -37,6 +39,8 @@ public class EquipInventory : MonoBehaviour
         {
             armouritem = item;
             uiequip.ShowArmourItem(item);
+            PlayerCombat pc = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCombat>();
+            pc.armorIsEquiped = true;
             //change armour on player
         }
     }
