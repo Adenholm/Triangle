@@ -9,6 +9,8 @@ public class Quest : MonoBehaviour
     int amount;
     public int amountgoal;
 
+    public GameObject map;
+
     void Start()
     {
         amount = 0;
@@ -23,6 +25,7 @@ public class Quest : MonoBehaviour
 
         if (amount == amountgoal)
         {
+            map.GetComponent<MapGenerator>().GenerateMap();
             Debug.Log("The End");
         }
     }

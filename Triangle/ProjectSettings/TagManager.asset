@@ -17,6 +17,7 @@ TagManager:
   - Airmeat
   - Plantmeat
   - FxTemporaire
+  - Quest
   layers:
   - Default
   - TransparentFX
