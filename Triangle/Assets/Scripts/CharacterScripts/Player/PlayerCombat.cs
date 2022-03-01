@@ -31,7 +31,7 @@ public class PlayerCombat : MonoBehaviour, IAttackable
     public float armourBuffer = 0.7f;
 
     public GameObject weaponSprite;
-    private bool weaponIsEquiped = false;
+    public bool weaponIsEquiped = false;
     public bool armorIsEquiped = false;
     private SortRenderer sortRenderer;
 

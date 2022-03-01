@@ -30,7 +30,9 @@ public class ButtonInventory : MonoBehaviour
         inventory = playeritem.GetInventory();
 
         //Get itemType of clicked Image
-        Image image = transform.Find("image").GetComponent<Image>();
+        //Image image = transform.Find("image").GetComponent<Image>();
+        Image button = transform.Find("Button").GetComponent<Image>();
+        Image image = button.transform.GetChild(0).GetComponent<Image>();
         Sprite sprite = image.sprite;
 
 

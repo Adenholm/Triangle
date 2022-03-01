@@ -199,14 +199,14 @@ public class Enemy : MonoBehaviour, IAttackable
 
             case Element.ICE:
                 health.TakeDamage((int)(damage * ElementHandler.DamageConverter(this.element, element)));
-                FreezeMovement(Time.time + 3f * ElementHandler.DamageConverter(this.element, element));
+                FreezeMovement(Time.time + 5f * ElementHandler.DamageConverter(this.element, element));
                 spawnParticle(Instantiate(iceParticles));
                 break;
 
             case Element.PLANTTHROW:
             case Element.PLANT:
                 health.TakeDamage((int)(damage * ElementHandler.DamageConverter(this.element, element)));
-                FreezeMovement(Time.time + 3f * ElementHandler.DamageConverter(this.element, element));
+                FreezeMovement(Time.time + 5f * ElementHandler.DamageConverter(this.element, element));
                 spawnParticle(Instantiate(plantParticles));
                 break;
 
