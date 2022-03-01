@@ -18,11 +18,12 @@ public class SortRenderer : MonoBehaviour
     }
 
     // Update is called once per frame
-    void LateUpdate()
+    void Update()
     {
+        layeroffset = 0;
         foreach (Renderer renderer in renderers)
         {
-            renderer.sortingOrder = (int)(sortingbase - transform.position.y - offset -layeroffset);
+            renderer.sortingOrder = (int)(sortingbase - (transform.position.y * 10) - offset - layeroffset);
             layeroffset++;
         }
         if (isStatic)

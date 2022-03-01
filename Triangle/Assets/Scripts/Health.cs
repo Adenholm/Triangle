@@ -13,11 +13,27 @@ public class Health : MonoBehaviour
 
     public int maxHealth = 100;
     private int currentHealth;
+    private Inventory inventory;
+
+    public Item.ItemType itemType0;
+    public int amount0;
+
+    public Item.ItemType itemType1;
+    public int amount1;
+
 
     void Start()
     {
         animator = GetComponentInChildren<Animator>();
         currentHealth = maxHealth;
+        inventory = new Inventory();
+
+        Item item0 = new Item { itemType = itemType0, amount = amount0 };
+        Item item1 = new Item { itemType = itemType1, amount = amount1 };
+
+        inventory.AddItem(item0);
+        inventory.AddItem(item1);
+
     }
 
     public void TakeDamage(int damage)
@@ -43,6 +59,9 @@ public class Health : MonoBehaviour
         //Die animation
 
         //Drop Items
+        Vector3 position = gameObject.transform.position;
+        inventory.DropItems(position);
+        Destroy(gameObject);
 
         //Disable
         Destroy(gameObject, 3f);
