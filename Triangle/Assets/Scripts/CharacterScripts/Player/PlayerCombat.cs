@@ -70,7 +70,7 @@ public class PlayerCombat : MonoBehaviour, IAttackable
     public void TakeDamage(int damage, Element element)
     {
         Debug.Log("You took " + damage + " in damage");
-        //damage = (int)ElementHandler.DamageConverter(activeElement, element);
+        damage = (int)(damage * ElementHandler.DamageConverter(activeElement, element));
         currentHealth -= damage;
         Debug.Log(currentHealth);
         Debug.Log(currentHealth / (float)maxHealth);
