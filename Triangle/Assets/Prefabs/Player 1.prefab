@@ -6693,7 +6693,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sortingbase: 5000
-  offset: 0
+  offset: -7
   isStatic: 0
 --- !u!114 &5751990540019722965
 MonoBehaviour:
@@ -6725,13 +6725,13 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 192
   weapon: {fileID: 5751990540019722966}
-  activeElement: 6
+  activeElement: 9
   attakRate: 1
   power: 1
   maxHealth: 100
   elementui: {fileID: 0}
   armourBuffer: 0.7
-  weaponSprite: {fileID: 0}
+  weaponSprite: {fileID: 3181161707073460801}
   weaponIsEquiped: 0
   armorIsEquiped: 0
 --- !u!114 &5751990540019722966
@@ -7005,7 +7005,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.37381536, g: 0.3962264, b: 0.35660377, a: 0}
+  m_BackGroundColor: {r: 0.30618426, g: 0.31132078, b: 0.24494484, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
