@@ -24,8 +24,6 @@ public class MapGenerator : MonoBehaviour
 	void Start()
 	{
 		GenerateMap();
-		CollisionMap();
-		SetPlayer();
 	}
 
 	void Update()
@@ -33,8 +31,6 @@ public class MapGenerator : MonoBehaviour
 		if (Input.GetMouseButtonDown(0))
 		{
 			GenerateMap();
-			CollisionMap();
-			SetPlayer();
 		}
 	}
 
@@ -72,6 +68,9 @@ public class MapGenerator : MonoBehaviour
 		
 		MeshGenerator meshGen = GetComponent<MeshGenerator>();
 		meshGen.GenerateMesh(borderedMap, 1);
+
+		CollisionMap();
+		SetPlayer();
 	}
 
 	void CollisionMap()
