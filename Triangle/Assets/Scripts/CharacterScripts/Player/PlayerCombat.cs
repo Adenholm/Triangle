@@ -73,7 +73,7 @@ public class PlayerCombat : MonoBehaviour, IAttackable
         currentHealth -= damage;
         Debug.Log(currentHealth);
         Debug.Log(currentHealth / (float)maxHealth);
-        UIHealthbar.instance.SetValue(currentHealth / (float)maxHealth);
+        //UIHealthbar.instance.SetValue(currentHealth / (float)maxHealth);
 
         Debug.Log("You took " + damage + " in damage");
 
