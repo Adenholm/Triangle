@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 
+using Pathfinding;
+
 public class MapGenerator : MonoBehaviour
 {
 
@@ -101,6 +103,8 @@ public class MapGenerator : MonoBehaviour
 
 		CollisionMap();
 		SetObjects();
+
+		AstarPath.active.Scan();
 	}
 
 	void CollisionMap()
