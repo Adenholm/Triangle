@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 public class ItemDatabase : MonoBehaviour
 {
-    public List<Item> items = new List<Item>();
+    /**public List<Item> items = new List<Item>();
     void Awake()
     {
         BuildItemDatabase();
@@ -34,5 +34,4 @@ public class ItemDatabase : MonoBehaviour
                 { "Defence", 10 }
             })
         };*/
-    }
 }

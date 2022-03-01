@@ -8,6 +8,8 @@ public class PlayerItemInteraction : MonoBehaviour
     private Inventory inventory;
     [SerializeField] private UiInventory uiInventory;
 
+    public Quest quest;
+
     void Awake()
     {
         inventory = new Inventory();
@@ -27,7 +29,12 @@ public class PlayerItemInteraction : MonoBehaviour
         if (itemworld != null)
         {
             // Touch item
-            inventory.AddItem(itemworld.GetItem());
+            Item item = itemworld.GetItem();
+            if (item.itemType == Item.ItemType.Crystal)
+            {
+                quest.RaiseAmount();
+            }
+            inventory.AddItem(item);
             itemworld.DestroySelf();
         }
     }
