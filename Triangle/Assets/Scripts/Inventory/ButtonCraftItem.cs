@@ -8,9 +8,14 @@ public class ButtonCraftItem : MonoBehaviour
 {
     [SerializeField] Image resultImage;
     [SerializeField] CraftInventory craftInventory;
-    public PlayerItemInteraction player;
+    private PlayerItemInteraction playeritem;
     public Inventory inventory;
     Item resultitem;
+
+    private void Start()
+    {
+        playeritem = GameObject.Find("Player 1(Clone)").GetComponent<PlayerItemInteraction>();
+    }
 
     public void RemoveCraftItem()
     {
@@ -34,7 +39,7 @@ public class ButtonCraftItem : MonoBehaviour
 
     public void CommitCrafting()
     {
-        inventory = player.GetInventory();
+        inventory = playeritem.GetInventory();
         List<Item> craftList = craftInventory.GetCraftList();
         Sprite sprite = resultImage.sprite;
         

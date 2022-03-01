@@ -13,7 +13,6 @@ public class Inventory
     public Inventory()
     {
         itemList = new List<Item>();
-
     }
 
 

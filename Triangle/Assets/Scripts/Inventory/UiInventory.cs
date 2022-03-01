@@ -16,15 +16,15 @@ public class UiInventory : MonoBehaviour
         itemSlotTemplate = itemSlotContainer.Find("itemSlotTemplate");
     }
 
-
-
     public void SetInventory(Inventory inventory)
     {
         this.inventory = inventory;
 
+        inventory.AddItem(new Item { itemType = Item.ItemType.Wood, amount = 1 });
+        inventory.AddItem(new Item { itemType = Item.ItemType.Iron, amount = 1 }); ;
         inventory.OnItemListChanged += Inventory_OnItemListChanged;
 
-        //RefreshInventoryItems();
+        RefreshInventoryItems();
     }
 
     private void Inventory_OnItemListChanged(object sender, System.EventArgs e)

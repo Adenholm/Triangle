@@ -6617,6 +6617,7 @@ GameObject:
   - component: {fileID: 5751990540019722952}
   - component: {fileID: 5751990540019722959}
   - component: {fileID: 5751990540019722958}
+  - component: {fileID: -8385273154133914866}
   m_Layer: 8
   m_Name: Player 1
   m_TagString: Player
@@ -6728,6 +6729,10 @@ MonoBehaviour:
   attakRate: 1
   power: 1
   maxHealth: 100
+  elementui: {fileID: 0}
+  armourBuffer: 0.7
+  weaponSprite: {fileID: 0}
+  armorIsEquiped: 0
 --- !u!114 &5751990540019722966
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6944,6 +6949,20 @@ MonoBehaviour:
   particleEffects: []
   cam: {fileID: 5751990540020862966}
   projectilePrefab: {fileID: 3945892778268067288, guid: 67a673e0a5ade31428fdf1cc3db08f9a, type: 3}
+--- !u!114 &-8385273154133914866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5751990540019722969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a650f02341bcc2144bcf63b8e1089ec0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiInventory: {fileID: 0}
+  quest: {fileID: 0}
 --- !u!1 &5751990540020862964
 GameObject:
   m_ObjectHideFlags: 0
