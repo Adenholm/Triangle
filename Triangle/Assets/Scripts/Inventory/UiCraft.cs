@@ -13,6 +13,9 @@ public class UiCraft : MonoBehaviour
     private Image image1;
     private Image image2;
     private Image imageresult;
+    private Transform button1;
+    private Transform button2;
+    private Transform buttonfinal;
 
     private void Start()
     {
@@ -20,10 +23,17 @@ public class UiCraft : MonoBehaviour
         craftSlot1 = itemCraftContainer.Find("craftSlot1");
         craftSlot2 = itemCraftContainer.Find("craftSlot2");
         craftSlotresult = itemCraftContainer.Find("craftSlotresult");
-        image1 = craftSlot1.Find("image").GetComponent<Image>();
-        image2 = craftSlot2.Find("image").GetComponent<Image>();
-        imageresult = craftSlotresult.Find("image").GetComponent<Image>();
 
+        //image1 = craftSlot1.Find("image").GetComponent<Image>();
+        //image2 = craftSlot2.Find("image").GetComponent<Image>();
+        //imageresult = craftSlotresult.Find("image").GetComponent<Image>();
+        button1 = craftSlot1.Find("Button");
+        button2 = craftSlot2.Find("Button");
+        buttonfinal = craftSlotresult.Find("Button");
+
+        image1 = button1.transform.GetChild(0).GetComponent<Image>();
+        image2 = button2.transform.GetChild(0).GetComponent<Image>();
+        imageresult = buttonfinal.transform.GetChild(0).GetComponent<Image>();
     }
 
 
