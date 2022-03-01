@@ -184,7 +184,7 @@ MonoBehaviour:
   lightningParticles: {fileID: 1628744458893394, guid: e243632bb3aff9549abdcfcc2ef0c4f0, type: 3}
   waterParticles: {fileID: 1687118924408352, guid: 77c69ec12208c4c4380d15e30b6f8f68, type: 3}
   iceParticles: {fileID: 100000, guid: f2dba9e16cd347f44a395b8204544ee5, type: 3}
-  plantParticles: {fileID: 0}
+  plantParticles: {fileID: 6862609620351797230, guid: 1d6bee15b629bcf4aa78cc10d5daf402, type: 3}
   steamParticles: {fileID: 100000, guid: 83cd9cc9f9c88824ba18dc59b05ae328, type: 3}
   hitParticles: {fileID: 100002, guid: e9391f622091e1449bdef4ef15af4948, type: 3}
 --- !u!114 &5319326807759878680
