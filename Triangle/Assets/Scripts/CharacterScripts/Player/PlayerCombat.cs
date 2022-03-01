@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,6 +10,7 @@ public class PlayerCombat : MonoBehaviour, IAttackable
 
     public Weapon weapon;
     public Element activeElement = Element.NONE;
+    private List<Element> baseElementsList;
     private IElementAttack[] elementAttacks; 
 
     public float attakRate = 0.5f;
@@ -24,6 +24,8 @@ public class PlayerCombat : MonoBehaviour, IAttackable
 
     private Animator animator;
     private PlayerMovement pm;
+
+    public ElementUI elementui;
 
 
     // Start is called before the first frame update
@@ -69,6 +71,9 @@ public class PlayerCombat : MonoBehaviour, IAttackable
     {
         damage = (int)(damage * ElementHandler.DamageConverter(activeElement, element));
         currentHealth -= damage;
+        Debug.Log(currentHealth);
+        Debug.Log(currentHealth / (float)maxHealth);
+        UIHealthbar.instance.SetValue(currentHealth / (float)maxHealth);
 
         Debug.Log("You took " + damage + " in damage");
 
@@ -89,4 +94,18 @@ public class PlayerCombat : MonoBehaviour, IAttackable
 
         Gizmos.DrawWireSphere(attackPoint.position, weapon.attackRange);
     }
-}
+
+    public void SetElement(Element newElement)
+        {
+            elementui.SetBaseElementImage(newElement);
+            baseElementsList = elementui.GetBaseElements();
+
+            if( baseElementsList.Count == 2) 
+            { 
+            var baseElementsSet = new HashSet<Element>(baseElementsList);
+            activeElement = ElementHandler.GetElement(baseElementsSet);
+            elementui.SetActivElementImage(activeElement);
+            }
+            
+        }
+    }
