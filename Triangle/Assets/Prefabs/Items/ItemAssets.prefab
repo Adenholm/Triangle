@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8065952538584489114
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8065952538584489112}
+  - component: {fileID: 8065952538584489115}
+  m_Layer: 0
+  m_Name: ItemAssets
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8065952538584489112
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8065952538584489114}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 468.16782, y: 149.35297, z: -0.3392635}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8065952538584489115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8065952538584489114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 218e1c7e1a110b048a82c6be84cc76dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pfCollectibles: {fileID: 3236375619139993549, guid: 70abb3013f7c97645a7c2a4ecdcd7cc8, type: 3}
+  woodSprite: {fileID: 21300000, guid: efe2ac1e04c61d1429e370eb4e493aa0, type: 3}
+  ironSprite: {fileID: 21300000, guid: 99bbc83bebbd36849b732a06e55ad60e, type: 3}
+  furSprite: {fileID: 21300000, guid: 99af61578a2317c449e29344b2b17479, type: 3}
+  crystalSprite: {fileID: 21300000, guid: ec6b13a5ffa52bc45b7eeb8e5f69c6a9, type: 3}
+  swordSprite: {fileID: 21300000, guid: b2f3327f47464544293b6b9018e1296e, type: 3}
+  bowSprite: {fileID: 21300000, guid: 45cfe68fb47a8514f96477d0fb432286, type: 3}
+  armourSprite: {fileID: 21300000, guid: 1c84373cf4be81c44b97ce70ed9d78e6, type: 3}
+  firemeatSprite: {fileID: 21300000, guid: 2c0594ae2de523e489e893a3bdd35591, type: 3}
+  watermeatSprite: {fileID: 21300000, guid: 423b354ae33e55442ad4efbf9884b894, type: 3}
+  airmeatSprite: {fileID: 21300000, guid: aabc3390020bb6c4cb62015f4da95deb, type: 3}
+  plantmeatSprite: {fileID: 21300000, guid: 5c16b2b00c187b14785425aab19e385d, type: 3}

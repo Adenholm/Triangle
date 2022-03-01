@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4910238082910935956
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4910238082910935958}
+  - component: {fileID: 4910238082910935957}
+  m_Layer: 0
+  m_Name: ElementAssets
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4910238082910935958
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4910238082910935956}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 468.16782, y: 149.35297, z: -0.3392635}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4910238082910935957
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4910238082910935956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e0c03c950cbc094ab063b3c137c76c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fireSprite: {fileID: 21300000, guid: 5fbb1feed8cc0744c9873daffd570d2d, type: 3}
+  waterSprite: {fileID: 21300000, guid: 2d24a91c6cb4e80499c4bd283348b59a, type: 3}
+  airSprite: {fileID: 21300000, guid: f01005d05b9228b41847b8fba61efefc, type: 3}
+  plantSprite: {fileID: 21300000, guid: df829ff4aa980c2449c2d652595e7e5d, type: 3}
+  lightningSprite: {fileID: 21300000, guid: 45b38b6434e57a04298db8f902a1e20a, type: 3}
+  poisonSprite: {fileID: 21300000, guid: 4157369513fa6b34ca5617b192d692fb, type: 3}
+  iceSprite: {fileID: 21300000, guid: be2dfa8b477570a48baed0262a6f9f31, type: 3}
+  plantthrowSprite: {fileID: 21300000, guid: 5967767f7e665cd4685dff8727b7324f, type: 3}
+  firewallSprite: {fileID: 21300000, guid: 8426c7189a04c37419eb2b8f526d5194, type: 3}
+  steamSprite: {fileID: 21300000, guid: be8b014e11b1ca64b98cab6aaeefa060, type: 3}
