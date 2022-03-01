@@ -43,12 +43,14 @@ public class EnemyAttackAi : MonoBehaviour
     private Animator animator;
     private Rigidbody2D rb;
     private MoveAi moveAi;
+    private AudioSource audioSource;
 
     private void Start()
     {
         animator = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody2D>();
         moveAi = GetComponent<MoveAi>();
+        audioSource = GetComponent<AudioSource>();
     }
     public void Strafe(Rigidbody2D rb, Transform target)
     {
@@ -69,6 +71,8 @@ public class EnemyAttackAi : MonoBehaviour
 
         if (hitEnemies.Length != 0)
         {
+            audioSource.Play();
+
             animator.SetTrigger("Attack");
             rb.velocity = Vector3.zero;
             nextAttackTime = Time.time + 1f * attakRate;
