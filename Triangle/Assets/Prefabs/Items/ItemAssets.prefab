@@ -52,7 +52,7 @@ MonoBehaviour:
   swordSprite: {fileID: 21300000, guid: b2f3327f47464544293b6b9018e1296e, type: 3}
   bowSprite: {fileID: 21300000, guid: 45cfe68fb47a8514f96477d0fb432286, type: 3}
   armourSprite: {fileID: 21300000, guid: 1c84373cf4be81c44b97ce70ed9d78e6, type: 3}
-  firemeatSprite: {fileID: 21300000, guid: 2c0594ae2de523e489e893a3bdd35591, type: 3}
-  watermeatSprite: {fileID: 21300000, guid: 423b354ae33e55442ad4efbf9884b894, type: 3}
-  airmeatSprite: {fileID: 21300000, guid: aabc3390020bb6c4cb62015f4da95deb, type: 3}
-  plantmeatSprite: {fileID: 21300000, guid: 5c16b2b00c187b14785425aab19e385d, type: 3}
+  firemeatSprite: {fileID: 21300000, guid: fa53e07c9ac1437498ee49db4d0cd44d, type: 3}
+  watermeatSprite: {fileID: 21300000, guid: f021fc64be5597e4dbed7e7b277eec59, type: 3}
+  airmeatSprite: {fileID: 21300000, guid: 08541c4c7eae0d849bdfc90ead2ed46e, type: 3}
+  plantmeatSprite: {fileID: 21300000, guid: 782cfd939669f9d4b87b1fa609647c11, type: 3}

@@ -8,17 +8,25 @@ using UnityEngine.UI;
 public class ButtonInventory : MonoBehaviour
 {
     
-    public PlayerItemInteraction playeritem;
-    public PlayerCombat playercombat;
+    private PlayerItemInteraction playeritem;
+    private PlayerCombat playercombat;
     
     public CraftInventory craftinventory;
     public EquipInventory equipInventory;
 
     private Inventory inventory;
 
+    private void Start()
+    {
+        playeritem = GameObject.Find("Player 1(Clone)").GetComponent<PlayerItemInteraction>();
+        Debug.Log(playeritem);
+        playercombat = GameObject.Find("Player 1(Clone)").GetComponent<PlayerCombat>();
+        Debug.Log(playercombat);
+    }
 
     public void UseItem()
     {
+        Debug.Log("Button clicked");
         inventory = playeritem.GetInventory();
 
         //Get itemType of clicked Image

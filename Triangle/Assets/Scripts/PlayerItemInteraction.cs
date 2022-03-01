@@ -6,15 +6,17 @@ public class PlayerItemInteraction : MonoBehaviour
 {
 
     private Inventory inventory;
-    [SerializeField] private UiInventory uiInventory;
+    private UiInventory uiInventory;
+    private Quest quest;
 
-    public Quest quest;
-
-    void Awake()
+    void Start()
     {
+        uiInventory = GameObject.Find("Inventory").GetComponent<UiInventory>();
+        Debug.Log(uiInventory);
+        quest = GameObject.Find("Quest").GetComponent<Quest>();
+        Debug.Log(quest);
         inventory = new Inventory();
         uiInventory.SetInventory(inventory);
-
     }
 
     public Inventory GetInventory()
