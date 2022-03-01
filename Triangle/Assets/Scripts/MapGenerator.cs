@@ -21,9 +21,14 @@ public class MapGenerator : MonoBehaviour
 	public GameObject boxCol;
 	public GameObject player;
 
-	public GameObject wolf;
+	public int wolfNumbers;
+	public GameObject redWolf;
+	public GameObject blackWolf;
+	public GameObject blueWolf;
+	public int dragonNumbers;
 	public GameObject dragon;
 
+	public int treeNumbers;
 	public GameObject greenTree1;
 	public GameObject greenTree2;
 	public GameObject blueTree1;
@@ -140,17 +145,17 @@ public class MapGenerator : MonoBehaviour
 				y = rnd.Next(0, height);
             }
         }
-		// Instantiate(wolf, new Vector3(x, y, 0), Quaternion.identity);
-		int wolves = 20; // (int)(width / 10);
-        while (wolves > 0)
+
+		int i = wolfNumbers;
+        while (i > 0)
         {
 			x = rnd.Next(0, width);
 			y = rnd.Next(0, height);
 			if (collisionMap[x, y] == 0)
 			{
-				Instantiate(wolf, new Vector3(x - ((float)width / 2.0f), y - ((float)height / 2.0f), 0), Quaternion.identity);
+				Instantiate(redWolf, new Vector3(x - ((float)width / 2.0f), y - ((float)height / 2.0f), 0), Quaternion.identity);
 				// Debug.Log( (x - ((float)width / 2.0f)).ToString() + " " + y - ((float)height / 2.0f))
-				wolves--;
+				i--;
 			}
 
 		}
