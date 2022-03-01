@@ -987,7 +987,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7351096557966289952}
-  - component: {fileID: 7351096557966289958}
+  - component: {fileID: 4048659039002711792}
   m_Layer: 5
   m_Name: itemSlotTemplate
   m_TagString: Wood
@@ -1018,7 +1018,7 @@ RectTransform:
   m_AnchoredPosition: {x: 27.88681, y: -31.050816}
   m_SizeDelta: {x: 40.1865, y: 38.2047}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &7351096557966289958
+--- !u!114 &4048659039002711792
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1030,8 +1030,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 496cc5895fe2ad640baf57c40e1cb039, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playeritem: {fileID: 0}
-  playercombat: {fileID: 0}
   craftinventory: {fileID: 7351096558008012396}
   equipInventory: {fileID: 7351096557347107857}
 --- !u!1 &7351096558008012399
@@ -1603,7 +1601,7 @@ GameObject:
   - component: {fileID: 7351096558353955913}
   - component: {fileID: 7351096558353955919}
   - component: {fileID: 7351096558353955918}
-  - component: {fileID: 7351096558353955916}
+  - component: {fileID: 5765556779689444877}
   m_Layer: 5
   m_Name: image
   m_TagString: Untagged
@@ -1669,7 +1667,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &7351096558353955916
+--- !u!114 &5765556779689444877
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1713,8 +1711,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7351096557966289958}
-        m_TargetAssemblyTypeName: Button, Assembly-CSharp
+      - m_Target: {fileID: 4048659039002711792}
+        m_TargetAssemblyTypeName: ButtonInventory, Assembly-CSharp
         m_MethodName: UseItem
         m_Mode: 1
         m_Arguments:
@@ -2841,7 +2839,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resultImage: {fileID: 7351096559216774643}
   craftInventory: {fileID: 7351096558008012396}
-  player: {fileID: 0}
 --- !u!1 &7351096559216774653
 GameObject:
   m_ObjectHideFlags: 0
@@ -3028,7 +3025,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resultImage: {fileID: 7351096559216774643}
   craftInventory: {fileID: 7351096558008012396}
-  player: {fileID: 0}
 --- !u!1 &7351096559226337424
 GameObject:
   m_ObjectHideFlags: 0
@@ -3082,7 +3078,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resultImage: {fileID: 7351096559216774643}
   craftInventory: {fileID: 7351096558008012396}
-  player: {fileID: 0}
 --- !u!1 &7351096559237489733
 GameObject:
   m_ObjectHideFlags: 0

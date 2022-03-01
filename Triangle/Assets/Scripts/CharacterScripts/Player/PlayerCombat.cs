@@ -43,6 +43,8 @@ public class PlayerCombat : MonoBehaviour, IAttackable
         elementAttacks = GetComponents<IElementAttack>();
         sortRenderer = GetComponent<SortRenderer>();
 
+        elementui = GameObject.Find("ElementUI").GetComponent<ElementUI>();
+
         currentHealth = maxHealth;
     }
 
