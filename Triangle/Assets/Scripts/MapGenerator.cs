@@ -66,12 +66,12 @@ public class MapGenerator : MonoBehaviour
 
 	void Update()
 	{
-		/*
-		if (Input.GetMouseButtonDown(0))
+		
+		if (Input.GetKey("t"))
 		{
 			GenerateMap();
 		}
-		*/
+		
 	}
 
 	void GenerateMap()
@@ -193,7 +193,8 @@ public class MapGenerator : MonoBehaviour
 		setDragon(dragonFire);
 
 		setFlora1(greenTree1, greenTree2, bush1, bush2, bush3, bush4, bushTiny1, bushTiny2, bushTiny3);
-		// setFlora2(blueTree1, blueTree2, bushDark1, bushDark2, bushDarkT1, bushDarkT2);
+		// setFlora2(blueTree1, blueTree2, bushDark1, bushDark2, bushDarkT1, bushDarkT2); // Breaks unity
+		setFlora3();
 	}
 
 	void setDragon(GameObject dragon1)
@@ -215,14 +216,33 @@ public class MapGenerator : MonoBehaviour
 		}
 	}
 
+	void setRocks()
+	{
+		System.Random rnd = new System.Random();
+		int x = 0;
+		int y = 0;
+
+		for (int i = 0; i < 20;)
+		{
+			x = rnd.Next(0, width);
+			y = rnd.Next(0, height);
+			if (collisionMap[x, y] == 0)
+			{
+				Instantiate(rocks, new Vector3(x - ((float)width / 2.0f), y - ((float)height / 2.0f), 0), Quaternion.identity);
+				i++;
+			}
+
+		}
+	}
+
 	void setFlora1(GameObject gTree1, GameObject gTree2, GameObject b1, GameObject b2, GameObject b3, GameObject b4, GameObject bT1, GameObject bT2, GameObject bT3)
     {
 		System.Random rnd = new System.Random();
 		int x, x1, dx, ddx = 0;
 		int y, y1, dy, ddy = 0;
-		int d1 = 8;
-		int d2 = 3;
-		int d3 = 2;
+		int d1 = 20;
+		int d2 = 8;
+		int d3 = 5;
 		int sw, sw1 = 0;
 
         for (int i = 0; i < treeNumbers;)
@@ -234,7 +254,7 @@ public class MapGenerator : MonoBehaviour
 				Instantiate(gTree1, new Vector3(x - ((float)width / 2.0f), y - ((float)height / 2.0f), 0), Quaternion.identity);
 				i++;
 
-                for (int i1 = 0; i1 < tree2Numbers; i1++)
+                for (int i1 = 0; i1 < tree2Numbers;)
                 {
 					x1 = x + rnd.Next(-d1, d1);
 					y1 = y + rnd.Next(-d1, d1);
@@ -323,41 +343,32 @@ public class MapGenerator : MonoBehaviour
 		}
 	}
 
-
-	void setFlora2(GameObject bTree1, GameObject bTree2, GameObject b1, GameObject b2, GameObject bT1, GameObject bT2)
-	{
+	void setFlora3()
+    {
 		System.Random rnd = new System.Random();
-		int x, x1, dx, ddx = 0;
-		int y, y1, dy, ddy = 0;
-		int d1 = 8;
-		int d2 = 3;
-		int d3 = 2;
+		int x, dx, ddx = 0;
+		int y, dy, ddy = 0;
+		int d1 = 18;
+		int d2 = 10;
+		int d3 = 7;
 		int sw, sw1 = 0;
-
 		for (int i = 0; i < treeNumbers;)
 		{
 			x = rnd.Next(0, width);
 			y = rnd.Next(0, height);
 			if (collisionMap[x, y] == 0)
 			{
-				Instantiate(bTree1, new Vector3(x - ((float)width / 2.0f), y - ((float)height / 2.0f), 0), Quaternion.identity);
+				Instantiate(blueTree1, new Vector3(x - ((float)width / 2.0f), y - ((float)height / 2.0f), 0), Quaternion.identity);
 				i++;
 
-				for (int i1 = 0; i1 < tree2Numbers; i1++)
+				dx = x + rnd.Next(-d1, d1);
+				dy = y + rnd.Next(-d1, d1);
+				if (IsInMapRange(dx, dy))
 				{
-					x1 = x + rnd.Next(-d1, d1);
-					y1 = y + rnd.Next(-d1, d1);
-
-					if (IsInMapRange(x1, y1))
+					if (collisionMap[dx, dy] == 0)
 					{
-						if (collisionMap[x1, y1] == 0)
-						{
-							Instantiate(bTree2, new Vector3(x1 - ((float)width / 2.0f), y1 - ((float)height / 2.0f), 0), Quaternion.identity);
-							i1++;
-						}
+						Instantiate(blueTree2, new Vector3(dx - ((float)width / 2.0f), dy - ((float)height / 2.0f), 0), Quaternion.identity);
 					}
-
-
 				}
 
 				sw = rnd.Next(1, 3);
@@ -372,13 +383,13 @@ public class MapGenerator : MonoBehaviour
 							switch (sw)
 							{
 								case 1:
-									Instantiate(b1, new Vector3(dx - ((float)width / 2.0f), dy - ((float)height / 2.0f), 0), Quaternion.identity);
-									sw = rnd.Next(1, 5);
+									Instantiate(bushDark1, new Vector3(dx - ((float)width / 2.0f), dy - ((float)height / 2.0f), 0), Quaternion.identity);
+									sw = rnd.Next(1, 3);
 									i2++;
 									break;
 								case 2:
-									Instantiate(b2, new Vector3(dx - ((float)width / 2.0f), dy - ((float)height / 2.0f), 0), Quaternion.identity);
-									sw = rnd.Next(1, 5);
+									Instantiate(bushDark2, new Vector3(dx - ((float)width / 2.0f), dy - ((float)height / 2.0f), 0), Quaternion.identity);
+									sw = rnd.Next(1, 3);
 									i2++;
 									break;
 							}
@@ -394,12 +405,12 @@ public class MapGenerator : MonoBehaviour
 										switch (sw1)
 										{
 											case 1:
-												Instantiate(bT1, new Vector3(ddx - ((float)width / 2.0f), ddy - ((float)height / 2.0f), 0), Quaternion.identity);
-												sw1 = rnd.Next(1, 4);
+												Instantiate(bushDarkT1, new Vector3(ddx - ((float)width / 2.0f), ddy - ((float)height / 2.0f), 0), Quaternion.identity);
+												sw1 = rnd.Next(1, 3);
 												break;
 											case 2:
-												Instantiate(bT2, new Vector3(ddx - ((float)width / 2.0f), ddy - ((float)height / 2.0f), 0), Quaternion.identity);
-												sw1 = rnd.Next(1, 4);
+												Instantiate(bushDarkT2, new Vector3(ddx - ((float)width / 2.0f), ddy - ((float)height / 2.0f), 0), Quaternion.identity);
+												sw1 = rnd.Next(1, 3);
 												break;
 										}
 									}
@@ -411,11 +422,12 @@ public class MapGenerator : MonoBehaviour
 					}
 
 				}
-
 			}
 
 		}
+
 	}
+
 
 
 	void ProcessMap()
@@ -556,7 +568,7 @@ public class MapGenerator : MonoBehaviour
 		List<Coord> line = GetLine(tileA, tileB);
 		foreach (Coord c in line)
 		{
-			DrawCircle(c, 2);
+			DrawCircle(c, 3); // Passage width
 		}
 	}
 
