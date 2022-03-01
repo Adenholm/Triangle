@@ -1756,10 +1756,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
-  itemType0: 0
-  amount0: 0
-  itemType1: 0
-  amount1: 0
+  itemType0: 2
+  amount0: 1
+  itemType1: 9
+  amount1: 1
 --- !u!114 &1067064826760178628
 MonoBehaviour:
   m_ObjectHideFlags: 0

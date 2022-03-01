@@ -17,6 +17,11 @@ public class SortRenderer : MonoBehaviour
         renderers = GetComponentsInChildren<Renderer>();
     }
 
+    public void Rerun()
+    {
+        renderers = GetComponentsInChildren<Renderer>();
+    }
+
     // Update is called once per frame
     void Update()
     {

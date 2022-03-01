@@ -197,6 +197,7 @@ GameObject:
   - component: {fileID: 818748216266665086}
   - component: {fileID: 818748216266665081}
   - component: {fileID: 818748216266665080}
+  - component: {fileID: 124301446}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -304,10 +305,14 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 192
   weapon: {fileID: 818748216266665056}
-  activeElement: 6
+  activeElement: 10
   attakRate: 1
   power: 1
   maxHealth: 100
+  elementui: {fileID: 0}
+  armourBuffer: 0.9
+  weaponSprite: {fileID: 7541887213445258487}
+  armorIsEquiped: 0
 --- !u!114 &818748216266665056
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -322,7 +327,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackRange: 1
   attackDamage: 40
-  element: 5
+  element: 10
 --- !u!114 &818748216266665062
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -524,6 +529,20 @@ MonoBehaviour:
   particleEffects: []
   cam: {fileID: 818748216267671872}
   projectilePrefab: {fileID: 3945892778268067288, guid: 67a673e0a5ade31428fdf1cc3db08f9a, type: 3}
+--- !u!114 &124301446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 818748216266665071}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a650f02341bcc2144bcf63b8e1089ec0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiInventory: {fileID: 0}
+  quest: {fileID: 0}
 --- !u!1 &818748216267671874
 GameObject:
   m_ObjectHideFlags: 0
@@ -567,7 +586,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.37381536, g: 0.3962264, b: 0.35660377, a: 0}
+  m_BackGroundColor: {r: 0.3764536, g: 0.3773585, b: 0.31826273, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -584,7 +603,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 10
+  orthographic size: 8
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1685,7 +1704,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7502749516249872194
 Transform:
   m_ObjectHideFlags: 0
