@@ -162,6 +162,7 @@ public class Enemy : MonoBehaviour, IAttackable
     public void FreezeMovement(float nextMoveTime)
     {
         this.nextMoveTime = nextMoveTime;
+        animator.SetFloat("Speed", 0f);
     }
 
     public void TakeDamage(int damage, Element element)
