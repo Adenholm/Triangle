@@ -16,10 +16,33 @@ public class MapGenerator : MonoBehaviour
 	public int randomFillPercent;
 
 	int[,] map;
-	bool[,] collisionMap;
+	int[,] collisionMap;
 
 	public GameObject boxCol;
 	public GameObject player;
+
+	public GameObject wolf;
+	public GameObject dragon;
+
+	public GameObject greenTree1;
+	public GameObject greenTree2;
+	public GameObject blueTree1;
+	public GameObject blueTree2;
+	public GameObject deadTree1;
+	public GameObject deadTree2;
+	public GameObject rocks;
+	public GameObject bush1;
+	public GameObject bush2;
+	public GameObject bush3;
+	public GameObject bush4;
+	public GameObject bushTiny1;
+	public GameObject bushTiny2;
+	public GameObject bushTiny3;
+	public GameObject bushDark1;
+	public GameObject bushDark2;
+	public GameObject bushDarkT1;
+	public GameObject bushDarkT2;
+
 
 	void Start()
 	{
@@ -28,16 +51,18 @@ public class MapGenerator : MonoBehaviour
 
 	void Update()
 	{
+		/*
 		if (Input.GetMouseButtonDown(0))
 		{
 			GenerateMap();
 		}
+		*/
 	}
 
 	void GenerateMap()
 	{
 		map = new int[width, height];
-		collisionMap = new bool[width, height];
+		collisionMap = new int[width, height];
 
 		RandomFillMap();
 
@@ -70,53 +95,67 @@ public class MapGenerator : MonoBehaviour
 		meshGen.GenerateMesh(borderedMap, 1);
 
 		CollisionMap();
-		SetPlayer();
+		SetObjects();
 	}
 
 	void CollisionMap()
 	{
-		//int count = 0;
-		int ifCol = 0;
+		int surrounding = 0;
 		for (int x = 0; x < width; x++)
 		{
 			for (int y = 0; y < height; y++)
 			{
-				ifCol = GetSurroundingWallCount(x, y);
-				if (ifCol >= 4 && ifCol <= 6)
+				surrounding = GetSurroundingWallCount(x, y);
+				if (surrounding >= 4 && surrounding <= 6)
 				{
-					collisionMap[x, y] = true;
-					//count++;
+					collisionMap[x, y] = 1;
 					Instantiate(boxCol, new Vector3(x - width / 2, y - height / 2, 0), Quaternion.identity);
-				}
-				else if (ifCol > 6)
+				} else if (surrounding > 6)
                 {
-					collisionMap[x, y] = true;
-                }
+					collisionMap[x, y] = 1;
+					// Instantiate(boxCol, new Vector3(x - width / 2, y - height / 2, 0), Quaternion.identity);
+				}
 			}
 		}
-		//Debug.Log("Count of collider points: ");
-		//Debug.Log(count);
 	}
 
-	void SetPlayer()
+	void SetObjects()
     {
-		int x = (int)(width / 2);
-		int y = (int)(height / 2);
+		int x = 0;
+		int y = 0;
 		System.Random rnd = new System.Random();
-		bool set = false;
-        while (!set)
+
+		bool playerSet = false;
+        while (!playerSet)
+
         {
-			if (collisionMap[x, y] == false)
+			if(collisionMap[x, y] == 0)
+			{
+				Instantiate(player, new Vector3(x - ((float)width / 2.0f), y - ((float)height / 2.0f), 0), Quaternion.identity);
+				playerSet = true;
+			}
+			else
             {
-				Instantiate(player, new Vector3(x - width / 2, y - height / 2, 0), Quaternion.identity);
-				set = true;
-				break;
-			} else
-            {
-				x = rnd.Next(1, width);
-				y = rnd.Next(1, height);
+				x = rnd.Next(0, width);
+				y = rnd.Next(0, height);
             }
         }
+		// Instantiate(wolf, new Vector3(x, y, 0), Quaternion.identity);
+		int wolves = 20; // (int)(width / 10);
+        while (wolves > 0)
+        {
+			x = rnd.Next(0, width);
+			y = rnd.Next(0, height);
+			if (collisionMap[x, y] == 0)
+			{
+				Instantiate(wolf, new Vector3(x - ((float)width / 2.0f), y - ((float)height / 2.0f), 0), Quaternion.identity);
+				// Debug.Log( (x - ((float)width / 2.0f)).ToString() + " " + y - ((float)height / 2.0f))
+				wolves--;
+			}
+
+		}
+
+
     }
 
 	void ProcessMap()
