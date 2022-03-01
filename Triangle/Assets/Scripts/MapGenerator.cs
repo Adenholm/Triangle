@@ -27,10 +27,14 @@ public class MapGenerator : MonoBehaviour
 	public GameObject redWolf;
 	public GameObject blackWolf;
 	public GameObject blueWolf;
+
 	public int dragonNumbers;
 	public GameObject dragon;
+	public GameObject dragonIce;
+	public GameObject dragonFire;
 
 	public int treeNumbers;
+	public int tree2Numbers;
 	public GameObject greenTree1;
 	public GameObject greenTree2;
 	public GameObject blueTree1;
@@ -38,15 +42,19 @@ public class MapGenerator : MonoBehaviour
 	public GameObject deadTree1;
 	public GameObject deadTree2;
 	public GameObject rocks;
+
+	public int bushNumbers;
 	public GameObject bush1;
 	public GameObject bush2;
 	public GameObject bush3;
 	public GameObject bush4;
+	public GameObject bushDark1;
+	public GameObject bushDark2;
+
+	public int tinyBushNumbers;
 	public GameObject bushTiny1;
 	public GameObject bushTiny2;
 	public GameObject bushTiny3;
-	public GameObject bushDark1;
-	public GameObject bushDark2;
 	public GameObject bushDarkT1;
 	public GameObject bushDarkT2;
 
@@ -132,10 +140,11 @@ public class MapGenerator : MonoBehaviour
     {
 		int x = 0;
 		int y = 0;
+
 		System.Random rnd = new System.Random();
 
 		bool playerSet = false;
-        while (!playerSet)
+        while (!playerSet) // Set player
 
         {
 			if(collisionMap[x, y] == 0)
@@ -150,22 +159,264 @@ public class MapGenerator : MonoBehaviour
             }
         }
 
-		int i = wolfNumbers;
-        while (i > 0)
+		int s = 0;
+		for (int i = 0; i < wolfNumbers;) // Set wolves
         {
 			x = rnd.Next(0, width);
 			y = rnd.Next(0, height);
 			if (collisionMap[x, y] == 0)
 			{
-				Instantiate(redWolf, new Vector3(x - ((float)width / 2.0f), y - ((float)height / 2.0f), 0), Quaternion.identity);
-				// Debug.Log( (x - ((float)width / 2.0f)).ToString() + " " + y - ((float)height / 2.0f))
-				i--;
+				s = rnd.Next(1, 4);
+				switch (s)
+                {
+					case 1:
+						Instantiate(blackWolf, new Vector3(x - ((float)width / 2.0f), y - ((float)height / 2.0f), 0), Quaternion.identity);
+						Debug.Log("wolf 1");
+						i++;
+						break;
+					case 2:
+						Instantiate(redWolf, new Vector3(x - ((float)width / 2.0f), y - ((float)height / 2.0f), 0), Quaternion.identity);
+						i++;
+						Debug.Log("wolf 2");
+						break;
+					case 3:
+						Instantiate(blueWolf, new Vector3(x - ((float)width / 2.0f), y - ((float)height / 2.0f), 0), Quaternion.identity);
+						i++;
+						Debug.Log("wolf 3");
+						break;
+				}
+			}
+		}
+
+		setDragon(dragon);
+		setDragon(dragonIce);
+		setDragon(dragonFire);
+
+		setFlora1(greenTree1, greenTree2, bush1, bush2, bush3, bush4, bushTiny1, bushTiny2, bushTiny3);
+		// setFlora2(blueTree1, blueTree2, bushDark1, bushDark2, bushDarkT1, bushDarkT2);
+	}
+
+	void setDragon(GameObject dragon1)
+    {
+		System.Random rnd = new System.Random();
+		int x = 0;
+		int y = 0;
+
+		for (int i = 0; i < dragonNumbers;)
+		{
+			x = rnd.Next(0, width);
+			y = rnd.Next(0, height);
+			if (collisionMap[x, y] == 0)
+			{
+				Instantiate(dragon1, new Vector3(x - ((float)width / 2.0f), y - ((float)height / 2.0f), 0), Quaternion.identity);
+				i++;
 			}
 
 		}
+	}
+
+	void setFlora1(GameObject gTree1, GameObject gTree2, GameObject b1, GameObject b2, GameObject b3, GameObject b4, GameObject bT1, GameObject bT2, GameObject bT3)
+    {
+		System.Random rnd = new System.Random();
+		int x, x1, dx, ddx = 0;
+		int y, y1, dy, ddy = 0;
+		int d1 = 8;
+		int d2 = 3;
+		int d3 = 2;
+		int sw, sw1 = 0;
+
+        for (int i = 0; i < treeNumbers;)
+        {
+			x = rnd.Next(0, width);
+			y = rnd.Next(0, height);
+			if (collisionMap[x, y] == 0)
+            {
+				Instantiate(gTree1, new Vector3(x - ((float)width / 2.0f), y - ((float)height / 2.0f), 0), Quaternion.identity);
+				i++;
+
+                for (int i1 = 0; i1 < tree2Numbers; i1++)
+                {
+					x1 = x + rnd.Next(-d1, d1);
+					y1 = y + rnd.Next(-d1, d1);
+					
+					if(IsInMapRange(x1, y1))
+                    {
+						if (collisionMap[x1, y1] == 0)
+						{
+							Instantiate(gTree2, new Vector3(x1 - ((float)width / 2.0f), y1 - ((float)height / 2.0f), 0), Quaternion.identity);
+							i1++;
+						}
+                    }
+					
+
+				}
+
+				sw = rnd.Next(1, 5);
+				for (int i2 = 0; i2 < bushNumbers;)
+                {
+					dx = x + rnd.Next(-d2, d2);
+					dy = y + rnd.Next(-d2, d2);
+					if(IsInMapRange(dx, dy))
+                    {
+						if (collisionMap[dx, dy] == 0)
+						{
+							switch (sw)
+							{
+								case 1:
+									Instantiate(b1, new Vector3(dx - ((float)width / 2.0f), dy - ((float)height / 2.0f), 0), Quaternion.identity);
+									sw = rnd.Next(1, 5);
+									i2++;
+									break;
+								case 2:
+									Instantiate(b2, new Vector3(dx - ((float)width / 2.0f), dy - ((float)height / 2.0f), 0), Quaternion.identity);
+									sw = rnd.Next(1, 5);
+									i2++;
+									break;
+								case 3:
+									Instantiate(b3, new Vector3(dx - ((float)width / 2.0f), dy - ((float)height / 2.0f), 0), Quaternion.identity);
+									sw = rnd.Next(1, 5);
+									i2++;
+									break;
+								case 4:
+									Instantiate(b4, new Vector3(dx - ((float)width / 2.0f), dy - ((float)height / 2.0f), 0), Quaternion.identity);
+									sw = rnd.Next(1, 5);
+									i2++;
+									break;
+
+							}
+							sw1 = rnd.Next(1, 4);
+							for (int i3 = 0; i3 < tinyBushNumbers; i3++)
+							{
+								ddx = dx + rnd.Next(-d3, d3);
+								ddy = dy + rnd.Next(-d3, d3);
+								if(IsInMapRange(ddx, ddy))
+                                {
+									if(collisionMap[ddx, ddy] == 0)
+									{
+										switch (sw1)
+										{
+											case 1:
+												Instantiate(bT1, new Vector3(ddx - ((float)width / 2.0f), ddy - ((float)height / 2.0f), 0), Quaternion.identity);
+												sw1 = rnd.Next(1, 4);
+												break;
+											case 2:
+												Instantiate(bT2, new Vector3(ddx - ((float)width / 2.0f), ddy - ((float)height / 2.0f), 0), Quaternion.identity);
+												sw1 = rnd.Next(1, 4);
+												break;
+											case 3:
+												Instantiate(bT3, new Vector3(ddx - ((float)width / 2.0f), ddy - ((float)height / 2.0f), 0), Quaternion.identity);
+												sw1 = rnd.Next(1, 4);
+												break;
+										}
+									}
+                                }
 
 
-    }
+							}
+						}
+                    }
+					
+                }
+				
+			}
+
+		}
+	}
+
+
+	void setFlora2(GameObject bTree1, GameObject bTree2, GameObject b1, GameObject b2, GameObject bT1, GameObject bT2)
+	{
+		System.Random rnd = new System.Random();
+		int x, x1, dx, ddx = 0;
+		int y, y1, dy, ddy = 0;
+		int d1 = 8;
+		int d2 = 3;
+		int d3 = 2;
+		int sw, sw1 = 0;
+
+		for (int i = 0; i < treeNumbers;)
+		{
+			x = rnd.Next(0, width);
+			y = rnd.Next(0, height);
+			if (collisionMap[x, y] == 0)
+			{
+				Instantiate(bTree1, new Vector3(x - ((float)width / 2.0f), y - ((float)height / 2.0f), 0), Quaternion.identity);
+				i++;
+
+				for (int i1 = 0; i1 < tree2Numbers; i1++)
+				{
+					x1 = x + rnd.Next(-d1, d1);
+					y1 = y + rnd.Next(-d1, d1);
+
+					if (IsInMapRange(x1, y1))
+					{
+						if (collisionMap[x1, y1] == 0)
+						{
+							Instantiate(bTree2, new Vector3(x1 - ((float)width / 2.0f), y1 - ((float)height / 2.0f), 0), Quaternion.identity);
+							i1++;
+						}
+					}
+
+
+				}
+
+				sw = rnd.Next(1, 3);
+				for (int i2 = 0; i2 < bushNumbers;)
+				{
+					dx = x + rnd.Next(-d2, d2);
+					dy = y + rnd.Next(-d2, d2);
+					if (IsInMapRange(dx, dy))
+					{
+						if (collisionMap[dx, dy] == 0)
+						{
+							switch (sw)
+							{
+								case 1:
+									Instantiate(b1, new Vector3(dx - ((float)width / 2.0f), dy - ((float)height / 2.0f), 0), Quaternion.identity);
+									sw = rnd.Next(1, 5);
+									i2++;
+									break;
+								case 2:
+									Instantiate(b2, new Vector3(dx - ((float)width / 2.0f), dy - ((float)height / 2.0f), 0), Quaternion.identity);
+									sw = rnd.Next(1, 5);
+									i2++;
+									break;
+							}
+							sw1 = rnd.Next(1, 3);
+							for (int i3 = 0; i3 < tinyBushNumbers; i3++)
+							{
+								ddx = dx + rnd.Next(-d3, d3);
+								ddy = dy + rnd.Next(-d3, d3);
+								if (IsInMapRange(ddx, ddy))
+								{
+									if (collisionMap[ddx, ddy] == 0)
+									{
+										switch (sw1)
+										{
+											case 1:
+												Instantiate(bT1, new Vector3(ddx - ((float)width / 2.0f), ddy - ((float)height / 2.0f), 0), Quaternion.identity);
+												sw1 = rnd.Next(1, 4);
+												break;
+											case 2:
+												Instantiate(bT2, new Vector3(ddx - ((float)width / 2.0f), ddy - ((float)height / 2.0f), 0), Quaternion.identity);
+												sw1 = rnd.Next(1, 4);
+												break;
+										}
+									}
+								}
+
+
+							}
+						}
+					}
+
+				}
+
+			}
+
+		}
+	}
+
 
 	void ProcessMap()
 	{
