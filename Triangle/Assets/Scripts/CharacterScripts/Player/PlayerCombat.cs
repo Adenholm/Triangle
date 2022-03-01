@@ -67,9 +67,10 @@ public class PlayerCombat : MonoBehaviour, IAttackable
 
     public void TakeDamage(int damage, Element element)
     {
-        Debug.Log("You took " + damage + " in damage");
         damage = (int)(damage * ElementHandler.DamageConverter(activeElement, element));
         currentHealth -= damage;
+
+        Debug.Log("You took " + damage + " in damage");
 
         if (currentHealth <= 0)
         {
