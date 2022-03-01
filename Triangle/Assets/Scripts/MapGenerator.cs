@@ -568,7 +568,7 @@ public class MapGenerator : MonoBehaviour
 		List<Coord> line = GetLine(tileA, tileB);
 		foreach (Coord c in line)
 		{
-			DrawCircle(c, 3); // Passage width
+			DrawCircle(c, 5); // Passage width
 		}
 	}
 
