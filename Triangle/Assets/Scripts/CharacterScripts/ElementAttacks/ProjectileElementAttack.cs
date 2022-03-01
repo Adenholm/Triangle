@@ -44,6 +44,35 @@ public class ProjectileElementAttack : MonoBehaviour, IElementAttack
             Vector2 movement = (Quaternion.Euler(0, 0, angle) * new Vector3(1, 0)) * projectileForce;
 
             prb.AddForce(movement, ForceMode2D.Impulse);
+
+            foreach (GameObject effect in particleEffects)
+            {
+                spawnParticle(Instantiate(effect));
+            }
+
+            nextAttackTime = Time.time + cooldownTime;
         }
+    }
+
+    private GameObject spawnParticle(GameObject particles)
+    {
+        particles.transform.SetParent(this.transform);
+        particles.transform.position = rb.position;
+
+        particles.SetActive(true);
+
+        ParticleSystem ps = particles.GetComponent<ParticleSystem>();
+
+        if (ps != null)
+        {
+            var main = ps.main;
+            if (main.loop)
+            {
+                ps.gameObject.AddComponent<CFX_AutoStopLoopedEffect>();
+                ps.gameObject.AddComponent<CFX_AutoDestructShuriken>();
+            }
+        }
+
+        return particles;
     }
 }

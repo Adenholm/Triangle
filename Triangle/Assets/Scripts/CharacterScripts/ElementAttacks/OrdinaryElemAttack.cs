@@ -12,6 +12,8 @@ public class OrdinaryElemAttack : MonoBehaviour, IElementAttack
     public float cooldownTime = 5f;
     public List<GameObject> particleEffects;
 
+    public bool drawGizmos = false;
+
     private float nextAttackTime;
 
     private Animator animator;
@@ -31,6 +33,11 @@ public class OrdinaryElemAttack : MonoBehaviour, IElementAttack
         {
             animator.SetTrigger("ElementAttack");
 
+            foreach (GameObject effect in particleEffects)
+            {
+                spawnParticle(Instantiate(effect));
+            }
+
             Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
 
             foreach (Collider2D enemy in hitEnemies)
@@ -38,10 +45,7 @@ public class OrdinaryElemAttack : MonoBehaviour, IElementAttack
                 enemy.GetComponent<IAttackable>().TakeDamage(attackDamage, element);
             }
 
-            foreach (GameObject effect in particleEffects)
-            {
-                spawnParticle(Instantiate(effect));
-            }
+            nextAttackTime = Time.time + cooldownTime;
         }
     }
 
@@ -65,5 +69,13 @@ public class OrdinaryElemAttack : MonoBehaviour, IElementAttack
         }
 
         return particles;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        if (drawGizmos)
+        {
+            Gizmos.DrawWireSphere(attackPoint.position, attackRange);
+        }
     }
 }

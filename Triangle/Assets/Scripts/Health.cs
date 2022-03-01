@@ -64,6 +64,6 @@ public class Health : MonoBehaviour
         Destroy(gameObject);
 
         //Disable
-        Destroy(gameObject, 5f);
+        Destroy(gameObject, 3f);
     }
 }
