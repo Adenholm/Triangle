@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerCombat : MonoBehaviour, IAttackable
 {
@@ -97,6 +98,7 @@ public class PlayerCombat : MonoBehaviour, IAttackable
     private void Die()
     {
         Debug.Log("You died");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         //Die animation
     }
     private void OnDrawGizmosSelected()
