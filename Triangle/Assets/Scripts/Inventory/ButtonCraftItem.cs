@@ -19,7 +19,9 @@ public class ButtonCraftItem : MonoBehaviour
 
     public void RemoveCraftItem()
     {
-        Image image = transform.Find("image").GetComponent<Image>();
+        Transform button = transform.Find("Button");
+        Image image = button.transform.GetChild(0).GetComponent<Image>();
+        //Image image = transform.Find("image").GetComponent<Image>();
         Sprite sprite = image.sprite;
         List <Item> craftList = craftInventory.GetCraftList();
 
